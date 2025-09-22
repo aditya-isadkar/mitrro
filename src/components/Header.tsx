@@ -1,4 +1,5 @@
 import { Search, ShoppingCart, User, Menu, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -32,14 +33,14 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">M</span>
               </div>
               <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Mitrro
               </h1>
-            </div>
+            </Link>
 
             {/* Search Bar */}
             <div className="flex-1 max-w-xl mx-8 hidden md:block">
@@ -76,9 +77,15 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8 pb-4 border-t pt-4">
-            <Button variant="ghost" className="font-medium">Home</Button>
-            <Button variant="ghost" className="font-medium">Categories</Button>
-            <Button variant="ghost" className="font-medium">Brand</Button>
+            <Link to="/">
+              <Button variant="ghost" className="font-medium">Home</Button>
+            </Link>
+            <Link to="/categories">
+              <Button variant="ghost" className="font-medium">Categories</Button>
+            </Link>
+            <Link to="/brands">
+              <Button variant="ghost" className="font-medium">Brands</Button>
+            </Link>
             <Button variant="ghost" className="font-medium">About Us</Button>
             <Button variant="ghost" className="font-medium">Contact</Button>
             <div className="ml-auto">
