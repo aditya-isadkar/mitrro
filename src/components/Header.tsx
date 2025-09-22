@@ -8,19 +8,19 @@ const Header = () => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-muted py-2 px-4">
+      <div className="bg-primary py-2 px-4">
         <div className="container mx-auto flex justify-between items-center text-sm">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-white">
             <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-primary" />
+              <Phone className="h-4 w-4" />
               <span>+1-234-567-8900</span>
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" />
+              <Mail className="h-4 w-4" />
               <span>info@mitrro.com</span>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 text-white">
             <span>Sale on Mitrro</span>
             <span>Welcome to Mitrro</span>
             <span>My Account</span>
@@ -89,7 +89,7 @@ const Header = () => {
             <Button variant="ghost" className="font-medium">About Us</Button>
             <Button variant="ghost" className="font-medium">Contact</Button>
             <div className="ml-auto">
-              <Button className="bg-gradient-secondary hover:bg-secondary-light">
+              <Button className="bg-gradient-primary hover:opacity-90">
                 Special Offer
               </Button>
             </div>

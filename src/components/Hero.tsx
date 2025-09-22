@@ -1,70 +1,71 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Truck, Award, HeadphonesIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-hero text-white overflow-hidden">
-      <div className="absolute inset-0 bg-black/20"></div>
-      <div className="container mx-auto px-4 py-20 relative z-10">
+    <section className="relative min-h-[600px] bg-gradient-hero flex items-center overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-primary opacity-95">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 75%, rgba(255,255,255,0.1) 0%, transparent 50%), 
+                           radial-gradient(circle at 75% 25%, rgba(255,255,255,0.1) 0%, transparent 50%)`
+        }} />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="space-y-8 animate-slide-up">
-            <div className="space-y-4">
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Professional Healthcare
-                <span className="block bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-                  Solutions
-                </span>
-              </h1>
-              <p className="text-xl text-white/90 leading-relaxed">
-                Providing pharmaceutical products of global quality standard. 
-                Be part of the world's largest healthcare and safety drive with trusted medical equipment.
-              </p>
+          {/* Hero Content */}
+          <div className="text-white space-y-6 animate-fade-in">
+            <div className="inline-block">
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                Medical Solutions Available
+              </span>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4">
-                Browse Products
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-4">
-                Our Services
-              </Button>
-            </div>
+            <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+              COVID-19 VACCINE
+            </h1>
+            
+            <p className="text-xl lg:text-2xl text-white/90 max-w-lg leading-relaxed">
+              BE THE PART OF THE WORLD'S LARGEST VACCINATION DRIVE.
+            </p>
+            
+            <p className="text-lg text-white/80 max-w-lg">
+              Professional medical equipment, sanitizers, and health solutions trusted by healthcare providers worldwide.
+            </p>
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
-              <div className="text-center">
-                <Shield className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium">Certified Quality</p>
-              </div>
-              <div className="text-center">
-                <Truck className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium">Fast Delivery</p>
-              </div>
-              <div className="text-center">
-                <Award className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium">Award Winning</p>
-              </div>
-              <div className="text-center">
-                <HeadphonesIcon className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm font-medium">24/7 Support</p>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
+                OUR SERVICE
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-white text-white hover:bg-white hover:text-primary"
+              >
+                Browse Products
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
 
-          {/* Image */}
-          <div className="relative animate-fade-in">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-3xl"></div>
-            <img
-              src={heroImage}
-              alt="Modern Medical Laboratory"
-              className="w-full h-[500px] object-cover rounded-3xl shadow-medical"
-            />
-            <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold">99.9%</div>
-                <div className="text-sm">Quality Assured</div>
+          {/* Hero Image */}
+          <div className="relative animate-scale-in" style={{ animationDelay: '0.3s' }}>
+            <div className="relative">
+              <img
+                src={heroImage}
+                alt="Medical professionals and healthcare equipment"
+                className="w-full h-auto rounded-2xl shadow-medical"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl" />
+            </div>
+            
+            {/* Floating Elements */}
+            <div className="absolute -top-4 -right-4 bg-white rounded-xl p-4 shadow-hover animate-bounce">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-success rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-foreground">Available Now</span>
               </div>
             </div>
           </div>

@@ -74,7 +74,7 @@ const FeaturedProducts = () => {
 
         {/* View All Button */}
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-secondary hover:bg-secondary-light">
+          <Button size="lg" className="bg-gradient-primary hover:opacity-90">
             View All Products
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
