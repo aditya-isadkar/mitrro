@@ -21,7 +21,9 @@ const Header = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4 text-white">
-            <span>Sale on Mitrro</span>
+            <Link to="/sale-on-mitrro" className="hover:text-white/80 transition-colors">
+              <span>Sale on Mitrro</span>
+            </Link>
             <span>Welcome to Mitrro</span>
             <span>My Account</span>
           </div>
@@ -86,12 +88,21 @@ const Header = () => {
             <Link to="/brands">
               <Button variant="ghost" className="font-medium">Brands</Button>
             </Link>
-            <Button variant="ghost" className="font-medium">About Us</Button>
-            <Button variant="ghost" className="font-medium">Contact</Button>
+            <Link to="/about-us">
+              <Button variant="ghost" className="font-medium">About Us</Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="ghost" className="font-medium">Contact</Button>
+            </Link>
+            <Link to="/blog">
+              <Button variant="ghost" className="font-medium">Blog</Button>
+            </Link>
             <div className="ml-auto">
-              <Button className="bg-gradient-primary hover:opacity-90">
-                Special Offer
-              </Button>
+              <Link to="/sale-on-mitrro">
+                <Button className="bg-gradient-primary hover:opacity-90">
+                  Special Offer
+                </Button>
+              </Link>
             </div>
           </nav>
         </div>
