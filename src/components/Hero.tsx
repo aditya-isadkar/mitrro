@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-[600px] bg-gradient-hero flex items-center overflow-hidden">
+  return <section className="relative min-h-[600px] bg-gradient-hero flex items-center overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-primary opacity-95">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 75%, rgba(255,255,255,0.1) 0%, transparent 50%), 
+        backgroundImage: `radial-gradient(circle at 25% 75%, rgba(255,255,255,0.1) 0%, transparent 50%), 
                            radial-gradient(circle at 75% 25%, rgba(255,255,255,0.1) 0%, transparent 50%)`
-        }} />
+      }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -39,11 +37,7 @@ const Hero = () => {
               <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
                 OUR SERVICE
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
+              <Button variant="outline" size="lg" className="border-white hover:bg-white text-orange-600">
                 Browse Products
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -51,13 +45,11 @@ const Hero = () => {
           </div>
 
           {/* Hero Image */}
-          <div className="relative animate-scale-in" style={{ animationDelay: '0.3s' }}>
+          <div className="relative animate-scale-in" style={{
+          animationDelay: '0.3s'
+        }}>
             <div className="relative">
-              <img
-                src={heroImage}
-                alt="Medical professionals and healthcare equipment"
-                className="w-full h-auto rounded-2xl shadow-medical"
-              />
+              <img src={heroImage} alt="Medical professionals and healthcare equipment" className="w-full h-auto rounded-2xl shadow-medical" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl" />
             </div>
             
@@ -71,8 +63,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
