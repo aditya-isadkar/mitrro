@@ -20,17 +20,20 @@ const Footer = () => {
               Your trusted partner in healthcare solutions.
             </p>
             <div className="flex gap-4">
-              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10">
-                <Facebook className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10" asChild>
+                <a href="https://www.facebook.com/mitrroglobal/" target="_blank" rel="noopener noreferrer">
+                  <Facebook className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10">
-                <Twitter className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10" asChild>
+                <a href="https://www.instagram.com/mitrroglobal/" target="_blank" rel="noopener noreferrer">
+                  <Instagram className="h-5 w-5" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10">
-                <Instagram className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10">
-                <Linkedin className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="text-background hover:text-primary hover:bg-background/10" asChild>
+                <a href="https://www.linkedin.com/company/mitrroglobal/" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="h-5 w-5" />
+                </a>
               </Button>
             </div>
           </div>
@@ -51,11 +54,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Categories</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Sanitizers</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Medical Equipment</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Vaccines</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Personal Care</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Professional Tools</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Covid-19 Essentials</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Consumable & Disposable</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Medical Device & Equipment</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Dental</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Surgical Instruments</a></li>
+              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Hospital Establishment</a></li>
             </ul>
           </div>
 
@@ -69,7 +73,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary" />
-                <span className="text-background/80">info@mitrro.com</span>
+                <span className="text-background/80">contact@mitrro.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-primary" />

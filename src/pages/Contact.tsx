@@ -141,7 +141,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold text-foreground mb-2">Email</h3>
                         <p className="text-muted-foreground">
-                          General: info@mitrro.com<br />
+                          General: contact@mitrro.com<br />
                           Sales: sales@mitrro.com<br />
                           Support: support@mitrro.com
                         </p>
