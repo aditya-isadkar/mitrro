@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-medical.jpg";
 const Hero = () => {
   return <section className="relative min-h-[600px] bg-gradient-hero flex items-center overflow-hidden">
@@ -34,13 +35,17 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
-                OUR SERVICE
-              </Button>
-              <Button variant="outline" size="lg" className="border-white hover:bg-white text-orange-600">
-                Browse Products
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/about-us">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
+                  OUR SERVICE
+                </Button>
+              </Link>
+              <Link to="/categories">
+                <Button variant="outline" size="lg" className="border-white hover:bg-white text-orange-600">
+                  Browse Products
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
 

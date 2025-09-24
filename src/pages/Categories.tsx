@@ -14,51 +14,51 @@ const Categories = () => {
   const categories = [
     {
       id: 1,
-      name: "Sanitizers & Disinfectants",
-      description: "Professional-grade sanitization solutions for medical and commercial use",
-      productCount: 45,
+      name: "Covid-19 Essentials",
+      description: "Essential products for COVID-19 prevention and treatment",
+      productCount: 67,
       image: "/placeholder.svg",
-      subcategories: ["Hand Sanitizers", "Surface Disinfectants", "Medical Grade", "Alcohol-based"]
+      subcategories: ["Vaccines", "Test Kits", "N95 Masks", "Sanitizers", "PPE"]
     },
     {
       id: 2,
-      name: "Medical Equipment",
-      description: "Essential medical devices and diagnostic equipment",
-      productCount: 78,
+      name: "Consumable & Disposable",
+      description: "Single-use medical supplies and consumables",
+      productCount: 234,
       image: "/placeholder.svg",
-      subcategories: ["Diagnostic Tools", "Monitoring Devices", "Emergency Equipment", "Surgical Instruments"]
+      subcategories: ["Syringes", "Gloves", "Gauze", "Bandages", "Surgical Drapes"]
     },
     {
       id: 3,
-      name: "Spraying Equipment",
-      description: "Industrial and agricultural spraying solutions",
-      productCount: 32,
+      name: "Medical Device & Equipment",
+      description: "Advanced medical devices and diagnostic equipment",
+      productCount: 156,
       image: "/placeholder.svg",
-      subcategories: ["Knapsack Sprayers", "Electric Sprayers", "Manual Pumps", "Atomizers"]
+      subcategories: ["Monitors", "Ventilators", "X-Ray Machines", "Ultrasound", "Defibrillators"]
     },
     {
       id: 4,
-      name: "Personal Protective Equipment",
-      description: "Safety gear and protective equipment for healthcare professionals",
-      productCount: 156,
+      name: "Dental",
+      description: "Comprehensive dental care equipment and supplies",
+      productCount: 89,
       image: "/placeholder.svg",
-      subcategories: ["Masks & Respirators", "Gloves", "Protective Clothing", "Eye Protection"]
+      subcategories: ["Dental Chairs", "Hand Pieces", "Dental X-Ray", "Orthodontics", "Implants"]
     },
     {
       id: 5,
-      name: "Laboratory Supplies",
-      description: "Essential supplies for medical and research laboratories",
-      productCount: 89,
+      name: "Surgical Instruments",
+      description: "Precision surgical tools and instruments",
+      productCount: 178,
       image: "/placeholder.svg",
-      subcategories: ["Test Kits", "Lab Equipment", "Consumables", "Safety Supplies"]
+      subcategories: ["Scalpels", "Forceps", "Scissors", "Retractors", "Clamps"]
     },
     {
       id: 6,
-      name: "Cleaning Solutions",
-      description: "Professional cleaning products for healthcare facilities",
-      productCount: 67,
+      name: "Hospital Establishment",
+      description: "Complete solutions for hospital setup and infrastructure",
+      productCount: 123,
       image: "/placeholder.svg",
-      subcategories: ["Floor Cleaners", "Multi-surface", "Specialized Solutions", "Eco-friendly"]
+      subcategories: ["Hospital Beds", "Operating Tables", "Medical Furniture", "Lighting", "Storage"]
     }
   ];
 
