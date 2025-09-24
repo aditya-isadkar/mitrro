@@ -1,6 +1,7 @@
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logoMitrro from "@/assets/logo-mitrro.webp";
 
 const Footer = () => {
   return (
@@ -10,10 +11,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
-              <h3 className="text-2xl font-bold">Mitrro</h3>
+              <img 
+                src={logoMitrro} 
+                alt="Mitrro Logo" 
+                className="h-10 w-auto"
+              />
             </div>
             <p className="text-background/80 leading-relaxed">
               Providing pharmaceutical products of global quality standard to patients worldwide. 

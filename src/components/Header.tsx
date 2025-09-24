@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import logoMitrro from "@/assets/logo-mitrro.webp";
 
 const Header = () => {
   return (
@@ -36,12 +37,11 @@ const Header = () => {
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Mitrro
-              </h1>
+              <img 
+                src={logoMitrro} 
+                alt="Mitrro Logo" 
+                className="h-10 w-auto"
+              />
             </Link>
 
             {/* Search Bar */}
