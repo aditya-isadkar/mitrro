@@ -8,7 +8,7 @@ import atomizerImage from "@/assets/product-atomizer.jpg";
 const FeaturedProducts = () => {
   const products = [
     {
-      id: 1,
+      id: "1",
       name: "Melange Room Sanitizer Spray",
       price: 250,
       originalPrice: 350,
@@ -16,7 +16,7 @@ const FeaturedProducts = () => {
       category: "Sanitizer"
     },
     {
-      id: 2,
+      id: "2",
       name: "Samson Knapsack Sprayer",
       price: 400,
       originalPrice: 450,
@@ -24,14 +24,14 @@ const FeaturedProducts = () => {
       category: "Equipment"
     },
     {
-      id: 3,
+      id: "3",
       name: "Atomization Machine for Office",
       price: 400,
       image: atomizerImage,
       category: "Medical Device"
     },
     {
-      id: 4,
+      id: "4",
       name: "Professional Sanitizer Spray Machine",
       price: 600,
       originalPrice: 750,

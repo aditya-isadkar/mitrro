@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Eye, Heart } from "lucide-react";
+import { Eye, Heart } from "lucide-react";
+import AddToCartButton from "@/components/AddToCartButton";
 
 interface ProductCardProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   originalPrice?: number;
@@ -12,7 +13,7 @@ interface ProductCardProps {
   category?: string;
 }
 
-const ProductCard = ({ name, price, originalPrice, image, category }: ProductCardProps) => {
+const ProductCard = ({ id, name, price, originalPrice, image, category }: ProductCardProps) => {
   const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
 
   return (
@@ -59,10 +60,14 @@ const ProductCard = ({ name, price, originalPrice, image, category }: ProductCar
           </div>
         </div>
 
-        <Button className="w-full bg-gradient-primary hover:bg-gradient-secondary transition-all duration-300 group">
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          Add to Cart
-        </Button>
+        <AddToCartButton
+          product={{
+            id,
+            name,
+            price,
+            image,
+          }}
+        />
       </CardContent>
     </Card>
   );

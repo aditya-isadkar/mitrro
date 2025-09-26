@@ -1,9 +1,10 @@
-import { Search, ShoppingCart, User, Menu, Phone, Mail } from "lucide-react";
+import { Search, User, Menu, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import logoMitrro from "@/assets/logo-mitrro.webp";
+import Cart from "@/components/Cart";
 
 const Header = () => {
   return (
@@ -67,12 +68,7 @@ const Header = () => {
                   <User className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center bg-destructive text-destructive-foreground">
-                  0
-                </Badge>
-              </Button>
+              <Cart />
               <Link to="/login">
                 <Button variant="ghost" size="icon" className="md:hidden">
                   <Menu className="h-5 w-5" />
