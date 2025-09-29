@@ -1,8 +1,9 @@
-import { Search, User, Menu, Phone, Mail, LogOut } from "lucide-react";
+import { Search, User, Menu, Phone, Mail, LogOut, UserCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import logoMitrro from "@/assets/logo-mitrro.webp";
 import Cart from "@/components/Cart";
 import { useAuth } from "@/hooks/useAuth";
@@ -83,11 +84,34 @@ const Header = () => {
 
             {/* Actions */}
             <div className="flex items-center gap-4">
-              <Link to="/login">
-                <Button variant="ghost" size="icon" className="hidden md:flex">
-                  <User className="h-5 w-5" />
-                </Button>
-              </Link>
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="hidden md:flex">
+                      <User className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem asChild>
+                      <Link to="/my-profile" className="flex items-center">
+                        <UserCircle className="h-4 w-4 mr-2" />
+                        My Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout} className="text-destructive">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link to="/login">
+                  <Button variant="ghost" size="icon" className="hidden md:flex">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </Link>
+              )}
               <Cart />
               <Link to="/login">
                 <Button variant="ghost" size="icon" className="md:hidden">
