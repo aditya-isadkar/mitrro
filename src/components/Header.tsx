@@ -16,7 +16,7 @@ const Header = () => {
     if (error) {
       toast.error("Error signing out");
     } else {
-      toast.success("Signed out successfully");
+      toast.success("Logged out successfully");
     }
   };
 
