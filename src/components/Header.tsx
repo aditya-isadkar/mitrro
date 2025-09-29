@@ -1,12 +1,25 @@
-import { Search, User, Menu, Phone, Mail } from "lucide-react";
+import { Search, User, Menu, Phone, Mail, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import logoMitrro from "@/assets/logo-mitrro.webp";
 import Cart from "@/components/Cart";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const Header = () => {
+  const { user, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast.error("Error signing out");
+    } else {
+      toast.success("Signed out successfully");
+    }
+  };
+
   return (
     <>
       {/* Top Bar */}
@@ -27,7 +40,14 @@ const Header = () => {
               <span>Sale on Mitrro</span>
             </Link>
             <span>Welcome to Mitrro</span>
-            <span>My Account</span>
+            {user && (
+              <button 
+                onClick={handleLogout}
+                className="hover:text-white/80 transition-colors cursor-pointer"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       </div>
