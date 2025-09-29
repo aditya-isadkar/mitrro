@@ -41,14 +41,6 @@ const Header = () => {
               <span>Sale on Mitrro</span>
             </Link>
             <span>Welcome to Mitrro</span>
-            {user && (
-              <button 
-                onClick={handleLogout}
-                className="hover:text-white/80 transition-colors cursor-pointer"
-              >
-                Logout
-              </button>
-            )}
           </div>
         </div>
       </div>
