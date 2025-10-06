@@ -45,10 +45,10 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li><a href="/about-us" className="text-background/80 hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="/categories" className="text-background/80 hover:text-primary transition-colors">Products</a></li>
-              <li><a href="/brands" className="text-background/80 hover:text-primary transition-colors">Services</a></li>
-              <li><a href="/sale-on-mitrro" className="text-background/80 hover:text-primary transition-colors">Special Offers</a></li>
+              <li><a href="/categories" className="text-background/80 hover:text-primary transition-colors">Categories</a></li>
+              <li><a href="/brands" className="text-background/80 hover:text-primary transition-colors">Brands</a></li>
               <li><a href="/contact" className="text-background/80 hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/blog" className="text-background/80 hover:text-primary transition-colors">Blog</a></li>
             </ul>
           </div>
 
