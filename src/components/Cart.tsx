@@ -53,7 +53,7 @@ const Cart = () => {
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold">Total:</span>
                   <span className="text-lg font-bold text-primary">
-                    ${totalPrice.toFixed(2)}
+                    ₹{totalPrice.toFixed(2)}
                   </span>
                 </div>
                 

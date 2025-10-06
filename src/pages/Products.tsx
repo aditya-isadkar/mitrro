@@ -7,6 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, SlidersHorizontal } from "lucide-react";
+import n95MaskImg from "@/assets/product-n95-mask.jpg";
+import covidTestImg from "@/assets/product-covid-test.jpg";
+import sanitizerImg from "@/assets/product-hand-sanitizer.jpg";
+import ppeSuitImg from "@/assets/product-ppe-suit.jpg";
+import syringesImg from "@/assets/product-syringes.jpg";
+import glovesImg from "@/assets/product-gloves.jpg";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
@@ -31,14 +37,14 @@ const Products = () => {
       name: "N95 Respirator Mask (Pack of 20)",
       price: 599,
       originalPrice: 799,
-      image: "/placeholder.svg",
+      image: n95MaskImg,
       category: "N95 Masks"
     },
     {
       id: "2",
       name: "COVID-19 RT-PCR Test Kit",
       price: 350,
-      image: "/placeholder.svg",
+      image: covidTestImg,
       category: "Test Kits"
     },
     {
@@ -46,21 +52,21 @@ const Products = () => {
       name: "Hand Sanitizer 500ml (Pack of 5)",
       price: 450,
       originalPrice: 550,
-      image: "/placeholder.svg",
+      image: sanitizerImg,
       category: "Sanitizers"
     },
     {
       id: "4",
       name: "PPE Full Body Suit",
       price: 1200,
-      image: "/placeholder.svg",
+      image: ppeSuitImg,
       category: "PPE"
     },
     {
       id: "5",
       name: "COVID-19 Rapid Antigen Test",
       price: 150,
-      image: "/placeholder.svg",
+      image: covidTestImg,
       category: "Test Kits"
     },
     {
@@ -68,21 +74,21 @@ const Products = () => {
       name: "Surgical Face Mask (Pack of 50)",
       price: 250,
       originalPrice: 350,
-      image: "/placeholder.svg",
+      image: n95MaskImg,
       category: "N95 Masks"
     },
     {
       id: "7",
       name: "Disposable Gloves (Pack of 100)",
       price: 400,
-      image: "/placeholder.svg",
+      image: glovesImg,
       category: "PPE"
     },
     {
       id: "8",
       name: "Alcohol-Based Hand Rub 1L",
       price: 280,
-      image: "/placeholder.svg",
+      image: sanitizerImg,
       category: "Sanitizers"
     }
   ];
@@ -94,14 +100,14 @@ const Products = () => {
       name: "Sterile Syringes 10ml (Pack of 100)",
       price: 850,
       originalPrice: 1000,
-      image: "/placeholder.svg",
+      image: syringesImg,
       category: "Syringes"
     },
     {
       id: "10",
       name: "Nitrile Examination Gloves (Box of 200)",
       price: 1200,
-      image: "/placeholder.svg",
+      image: glovesImg,
       category: "Gloves"
     },
     {

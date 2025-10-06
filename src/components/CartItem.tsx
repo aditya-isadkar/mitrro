@@ -20,7 +20,7 @@ const CartItemComponent = ({ item }: CartItemProps) => {
       <div className="flex-1">
         <h4 className="font-medium text-sm">{item.name}</h4>
         <p className="text-sm text-muted-foreground">
-          ${item.price.toFixed(2)}
+          ₹{item.price.toFixed(2)}
         </p>
       </div>
       
