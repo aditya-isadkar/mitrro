@@ -143,31 +143,16 @@ const Categories = () => {
                       {category.description}
                     </p>
                   </div>
-                  <Badge variant="secondary" className="ml-2">
-                    {category.productCount} items
-                  </Badge>
                 </div>
               </CardHeader>
               
               <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-medium text-sm text-muted-foreground mb-2">
-                      Subcategories:
-                    </h4>
-                    <div className="flex flex-wrap gap-1">
-                      {category.subcategories.map((sub, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs">
-                          {sub}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <Button className="w-full mt-4">
-                    Browse Products
-                  </Button>
-                </div>
+                <Button 
+                  className="w-full" 
+                  onClick={() => window.location.href = `/products?category=${encodeURIComponent(category.name)}`}
+                >
+                  Browse Products
+                </Button>
               </CardContent>
             </Card>
           ))}

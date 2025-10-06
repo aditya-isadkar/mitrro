@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
+import Products from "./pages/Products";
 import Brands from "./pages/Brands";
 import SaleOnMitrro from "./pages/SaleOnMitrro";
 import AboutUs from "./pages/AboutUs";
@@ -32,6 +33,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/products" element={<Products />} />
               <Route path="/brands" element={<Brands />} />
               <Route path="/sale-on-mitrro" element={<SaleOnMitrro />} />
               <Route path="/about-us" element={<AboutUs />} />
