@@ -44,11 +44,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Products</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Services</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Special Offers</a></li>
-              <li><a href="#" className="text-background/80 hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/about-us" className="text-background/80 hover:text-primary transition-colors">About Us</a></li>
+              <li><a href="/categories" className="text-background/80 hover:text-primary transition-colors">Products</a></li>
+              <li><a href="/brands" className="text-background/80 hover:text-primary transition-colors">Services</a></li>
+              <li><a href="/sale-on-mitrro" className="text-background/80 hover:text-primary transition-colors">Special Offers</a></li>
+              <li><a href="/contact" className="text-background/80 hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -69,18 +69,18 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Get in Touch</h4>
             <div className="space-y-4 mb-6">
-              <div className="flex items-center gap-3">
+              <a href="tel:+919968763181" className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5 text-primary" />
-                <span className="text-background/80">+1-234-567-8900</span>
-              </div>
-              <div className="flex items-center gap-3">
+                <span>+91 99687 63181</span>
+              </a>
+              <a href="mailto:contact@mitrro.com" className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors">
                 <Mail className="h-5 w-5 text-primary" />
-                <span className="text-background/80">contact@mitrro.com</span>
-              </div>
-              <div className="flex items-center gap-3">
+                <span>contact@mitrro.com</span>
+              </a>
+              <a href="https://maps.google.com/?q=South+Delhi+110001+Delhi+IN" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span className="text-background/80">123 Medical Center, Health City</span>
-              </div>
+                <span>South Delhi 110001 Delhi IN</span>
+              </a>
             </div>
             
             <div>
@@ -100,7 +100,7 @@ const Footer = () => {
 
         <div className="border-t border-background/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-background/60 text-sm">
-            © 2024 Mitrro. All rights reserved. | Privacy Policy | Terms of Service
+            © 2024 Mitrro. All rights reserved. | <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a> | <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
           </p>
           <p className="text-background/60 text-sm mt-4 md:mt-0">
             Built with care for better healthcare solutions
