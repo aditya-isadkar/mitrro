@@ -1,6 +1,7 @@
 import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import sanitizerImage from "@/assets/product-sanitizer.jpg";
 import sprayerImage from "@/assets/product-sprayer.jpg";
 import atomizerImage from "@/assets/product-atomizer.jpg";
@@ -74,10 +75,12 @@ const FeaturedProducts = () => {
 
         {/* View All Button */}
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-            View All Products
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link to="/products">
+            <Button size="lg" className="bg-gradient-primary hover:opacity-90">
+              View All Products
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
