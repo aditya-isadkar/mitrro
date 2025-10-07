@@ -40,9 +40,9 @@ const Hero = () => {
                   OUR SERVICE
                 </Button>
               </Link>
-              <Link to="/categories">
+              <Link to="/products">
                 <Button variant="outline" size="lg" className="border-white hover:bg-white text-orange-600">
-                  Browse Products
+                  Browse All Products
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>

@@ -431,6 +431,18 @@ const Products = () => {
   const subcategories = categoryData[categoryName] || ["All"];
   
   const getProductsByCategory = () => {
+    if (!categoryName) {
+      // Return all products when no category is specified
+      return [
+        ...covidProducts,
+        ...consumableProducts,
+        ...medicalDeviceProducts,
+        ...dentalProducts,
+        ...surgicalProducts,
+        ...hospitalProducts
+      ];
+    }
+    
     switch(categoryName) {
       case "Covid-19 Essentials":
         return covidProducts;
@@ -465,32 +477,34 @@ const Products = () => {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">
-            {categoryName}
+            {categoryName || "All Products"}
           </h1>
           <p className="text-muted-foreground text-lg">
-            Browse products by subcategory
+            {categoryName ? "Browse products by subcategory" : "Browse all medical products and equipment"}
           </p>
         </div>
 
         {/* Subcategory Filters */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <SlidersHorizontal className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-lg font-semibold">Filter by Subcategory</h2>
+        {categoryName && (
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <SlidersHorizontal className="h-5 w-5 text-muted-foreground" />
+              <h2 className="text-lg font-semibold">Filter by Subcategory</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {subcategories.map((sub) => (
+                <Badge
+                  key={sub}
+                  variant={selectedSubcategory === sub ? "default" : "outline"}
+                  className="cursor-pointer px-4 py-2 text-sm hover:bg-primary/90 transition-colors"
+                  onClick={() => setSelectedSubcategory(sub)}
+                >
+                  {sub}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {subcategories.map((sub) => (
-              <Badge
-                key={sub}
-                variant={selectedSubcategory === sub ? "default" : "outline"}
-                className="cursor-pointer px-4 py-2 text-sm hover:bg-primary/90 transition-colors"
-                onClick={() => setSelectedSubcategory(sub)}
-              >
-                {sub}
-              </Badge>
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Search Bar */}
         <div className="mb-8">
