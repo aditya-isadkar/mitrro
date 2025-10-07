@@ -13,6 +13,26 @@ import sanitizerImg from "@/assets/product-hand-sanitizer.jpg";
 import ppeSuitImg from "@/assets/product-ppe-suit.jpg";
 import syringesImg from "@/assets/product-syringes.jpg";
 import glovesImg from "@/assets/product-gloves.jpg";
+import monitorImg from "@/assets/product-monitor.jpg";
+import ventilatorImg from "@/assets/product-ventilator.jpg";
+import xrayImg from "@/assets/product-xray.jpg";
+import ultrasoundImg from "@/assets/product-ultrasound.jpg";
+import defibrillatorImg from "@/assets/product-defibrillator.jpg";
+import dentalChairImg from "@/assets/product-dental-chair.jpg";
+import dentalHandpieceImg from "@/assets/product-dental-handpiece.jpg";
+import dentalXrayImg from "@/assets/product-dental-xray.jpg";
+import orthodonticsImg from "@/assets/product-orthodontics.jpg";
+import implantsImg from "@/assets/product-implants.jpg";
+import scalpelImg from "@/assets/product-scalpel.jpg";
+import forcepsImg from "@/assets/product-forceps.jpg";
+import scissorsImg from "@/assets/product-scissors.jpg";
+import hospitalBedImg from "@/assets/product-hospital-bed.jpg";
+import operatingTableImg from "@/assets/product-operating-table.jpg";
+import surgicalLightImg from "@/assets/product-surgical-light.jpg";
+import storageImg from "@/assets/product-storage.jpg";
+import gauzeImg from "@/assets/product-gauze.jpg";
+import drapesImg from "@/assets/product-drapes.jpg";
+import furnitureImg from "@/assets/product-furniture.jpg";
 
 const Products = () => {
   const [searchParams] = useSearchParams();
@@ -114,7 +134,7 @@ const Products = () => {
       id: "11",
       name: "Sterile Gauze Pads 4x4 (Pack of 200)",
       price: 450,
-      image: "/placeholder.svg",
+      image: gauzeImg,
       category: "Gauze"
     },
     {
@@ -122,21 +142,21 @@ const Products = () => {
       name: "Adhesive Bandages Assorted (Box of 100)",
       price: 180,
       originalPrice: 250,
-      image: "/placeholder.svg",
+      image: gauzeImg,
       category: "Bandages"
     },
     {
       id: "13",
       name: "Surgical Drapes Sterile (Pack of 50)",
       price: 2500,
-      image: "/placeholder.svg",
+      image: drapesImg,
       category: "Surgical Drapes"
     },
     {
       id: "14",
       name: "Insulin Syringes 1ml (Pack of 100)",
       price: 650,
-      image: "/placeholder.svg",
+      image: syringesImg,
       category: "Syringes"
     },
     {
@@ -144,14 +164,14 @@ const Products = () => {
       name: "Elastic Bandage Roll 6 inch",
       price: 120,
       originalPrice: 180,
-      image: "/placeholder.svg",
+      image: gauzeImg,
       category: "Bandages"
     },
     {
       id: "16",
       name: "Latex Surgical Gloves (Pack of 50)",
       price: 950,
-      image: "/placeholder.svg",
+      image: glovesImg,
       category: "Gloves"
     }
   ];
@@ -163,21 +183,21 @@ const Products = () => {
       name: "Patient Vital Signs Monitor",
       price: 45000,
       originalPrice: 52000,
-      image: "/placeholder.svg",
+      image: monitorImg,
       category: "Monitors"
     },
     {
       id: "18",
       name: "ICU Ventilator Machine",
       price: 350000,
-      image: "/placeholder.svg",
+      image: ventilatorImg,
       category: "Ventilators"
     },
     {
       id: "19",
       name: "Digital X-Ray Machine",
       price: 850000,
-      image: "/placeholder.svg",
+      image: xrayImg,
       category: "X-Ray Machines"
     },
     {
@@ -185,14 +205,14 @@ const Products = () => {
       name: "Portable Ultrasound Scanner",
       price: 120000,
       originalPrice: 145000,
-      image: "/placeholder.svg",
+      image: ultrasoundImg,
       category: "Ultrasound"
     },
     {
       id: "21",
       name: "Automated External Defibrillator",
       price: 85000,
-      image: "/placeholder.svg",
+      image: defibrillatorImg,
       category: "Defibrillators"
     },
     {
@@ -200,21 +220,21 @@ const Products = () => {
       name: "ECG Machine 12 Channel",
       price: 65000,
       originalPrice: 75000,
-      image: "/placeholder.svg",
+      image: monitorImg,
       category: "Monitors"
     },
     {
       id: "23",
       name: "Anesthesia Ventilator",
       price: 280000,
-      image: "/placeholder.svg",
+      image: ventilatorImg,
       category: "Ventilators"
     },
     {
       id: "24",
       name: "Color Doppler Ultrasound",
       price: 450000,
-      image: "/placeholder.svg",
+      image: ultrasoundImg,
       category: "Ultrasound"
     }
   ];
@@ -226,21 +246,21 @@ const Products = () => {
       name: "Electric Dental Chair Unit",
       price: 185000,
       originalPrice: 210000,
-      image: "/placeholder.svg",
+      image: dentalChairImg,
       category: "Dental Chairs"
     },
     {
       id: "26",
       name: "High Speed Dental Handpiece",
       price: 12500,
-      image: "/placeholder.svg",
+      image: dentalHandpieceImg,
       category: "Hand Pieces"
     },
     {
       id: "27",
       name: "Digital Dental X-Ray Sensor",
       price: 95000,
-      image: "/placeholder.svg",
+      image: dentalXrayImg,
       category: "Dental X-Ray"
     },
     {
@@ -248,21 +268,21 @@ const Products = () => {
       name: "Orthodontic Bracket Kit (Complete Set)",
       price: 8500,
       originalPrice: 11000,
-      image: "/placeholder.svg",
+      image: orthodonticsImg,
       category: "Orthodontics"
     },
     {
       id: "29",
       name: "Titanium Dental Implants (Pack of 10)",
       price: 45000,
-      image: "/placeholder.svg",
+      image: implantsImg,
       category: "Implants"
     },
     {
       id: "30",
       name: "Low Speed Dental Handpiece",
       price: 8500,
-      image: "/placeholder.svg",
+      image: dentalHandpieceImg,
       category: "Hand Pieces"
     },
     {
@@ -270,14 +290,14 @@ const Products = () => {
       name: "Dental Chair with LED Light",
       price: 165000,
       originalPrice: 195000,
-      image: "/placeholder.svg",
+      image: dentalChairImg,
       category: "Dental Chairs"
     },
     {
       id: "32",
       name: "Orthodontic Arch Wires Set",
       price: 3500,
-      image: "/placeholder.svg",
+      image: orthodonticsImg,
       category: "Orthodontics"
     }
   ];
@@ -289,21 +309,21 @@ const Products = () => {
       name: "Surgical Scalpel Set (10 pieces)",
       price: 1800,
       originalPrice: 2200,
-      image: "/placeholder.svg",
+      image: scalpelImg,
       category: "Scalpels"
     },
     {
       id: "34",
       name: "Tissue Forceps 6 inch",
       price: 450,
-      image: "/placeholder.svg",
+      image: forcepsImg,
       category: "Forceps"
     },
     {
       id: "35",
       name: "Surgical Scissors Curved",
       price: 650,
-      image: "/placeholder.svg",
+      image: scissorsImg,
       category: "Scissors"
     },
     {
@@ -311,21 +331,21 @@ const Products = () => {
       name: "Self-Retaining Retractor",
       price: 2500,
       originalPrice: 3000,
-      image: "/placeholder.svg",
+      image: forcepsImg,
       category: "Retractors"
     },
     {
       id: "37",
       name: "Hemostatic Clamps Set (5 pieces)",
       price: 1850,
-      image: "/placeholder.svg",
+      image: forcepsImg,
       category: "Clamps"
     },
     {
       id: "38",
       name: "Disposable Scalpel Blades (Pack of 100)",
       price: 850,
-      image: "/placeholder.svg",
+      image: scalpelImg,
       category: "Scalpels"
     },
     {
@@ -333,14 +353,14 @@ const Products = () => {
       name: "Surgical Scissors Straight 5.5 inch",
       price: 580,
       originalPrice: 750,
-      image: "/placeholder.svg",
+      image: scissorsImg,
       category: "Scissors"
     },
     {
       id: "40",
       name: "Artery Forceps Curved 6 inch",
       price: 520,
-      image: "/placeholder.svg",
+      image: forcepsImg,
       category: "Forceps"
     }
   ];
@@ -352,21 +372,21 @@ const Products = () => {
       name: "Electric ICU Hospital Bed",
       price: 55000,
       originalPrice: 65000,
-      image: "/placeholder.svg",
+      image: hospitalBedImg,
       category: "Hospital Beds"
     },
     {
       id: "42",
       name: "Hydraulic Operating Table",
       price: 185000,
-      image: "/placeholder.svg",
+      image: operatingTableImg,
       category: "Operating Tables"
     },
     {
       id: "43",
       name: "Medical Examination Couch",
       price: 18500,
-      image: "/placeholder.svg",
+      image: furnitureImg,
       category: "Medical Furniture"
     },
     {
@@ -374,21 +394,21 @@ const Products = () => {
       name: "LED Surgical Light Single Dome",
       price: 125000,
       originalPrice: 145000,
-      image: "/placeholder.svg",
+      image: surgicalLightImg,
       category: "Lighting"
     },
     {
       id: "45",
       name: "Medical Storage Cabinet Stainless Steel",
       price: 28500,
-      image: "/placeholder.svg",
+      image: storageImg,
       category: "Storage"
     },
     {
       id: "46",
       name: "Manual Hospital Bed 3 Function",
       price: 32000,
-      image: "/placeholder.svg",
+      image: hospitalBedImg,
       category: "Hospital Beds"
     },
     {
@@ -396,14 +416,14 @@ const Products = () => {
       name: "Medical Trolley with Drawers",
       price: 12500,
       originalPrice: 15000,
-      image: "/placeholder.svg",
+      image: furnitureImg,
       category: "Medical Furniture"
     },
     {
       id: "48",
       name: "Double Door Medical Refrigerator",
       price: 45000,
-      image: "/placeholder.svg",
+      image: storageImg,
       category: "Storage"
     }
   ];
