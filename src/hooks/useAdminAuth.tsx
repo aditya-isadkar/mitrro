@@ -41,12 +41,15 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await checkAdminRole(session.user.id);
+          // Defer Supabase role check to avoid deadlocks inside the auth callback
+          setTimeout(() => {
+            checkAdminRole(session.user!.id);
+          }, 0);
         } else {
           setIsAdmin(false);
         }
