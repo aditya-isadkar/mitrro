@@ -60,7 +60,7 @@ const AdminLogin = () => {
         title: "Success",
         description: "Logged in successfully",
       });
-      navigate("/admin/dashboard");
+      // Navigation will be handled by useEffect after auth state updates
     }
   };
 
