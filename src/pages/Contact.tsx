@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -42,13 +43,35 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log("Contact form data:", data);
-    setIsSubmitted(true);
-    toast({
-      title: "Message Sent!",
-      description: "We've received your message and will respond within 24 hours.",
-    });
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const fullName = `${data.firstName} ${data.lastName}`;
+      const detailedMessage = `Subject: ${data.subject}\nCompany: ${data.company}\n\n${data.message}`;
+      
+      const { error } = await supabase
+        .from('contact_inquiries')
+        .insert({
+          name: fullName,
+          email: data.email,
+          phone: data.phone,
+          message: detailedMessage,
+        });
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast({
+        title: "Message Sent!",
+        description: "We've received your message and will respond within 24 hours.",
+      });
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (isSubmitted) {

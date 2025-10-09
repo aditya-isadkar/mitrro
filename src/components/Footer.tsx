@@ -2,8 +2,61 @@ import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import logoMitrro from "@/assets/logo-mitrro.webp";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert({ email });
+
+      if (error) throw error;
+
+      toast({
+        title: "Subscribed!",
+        description: "You've successfully subscribed to our newsletter.",
+      });
+      setEmail("");
+    } catch (error: any) {
+      console.error("Error subscribing to newsletter:", error);
+      if (error.code === '23505') {
+        toast({
+          title: "Already Subscribed",
+          description: "This email is already subscribed to our newsletter.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to subscribe. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
@@ -85,15 +138,23 @@ const Footer = () => {
             
             <div>
               <h5 className="font-semibold mb-3">Newsletter</h5>
-              <div className="flex gap-2">
+              <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <Input 
+                  type="email"
                   placeholder="Your email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-background/10 border-background/20 text-background placeholder:text-background/60"
+                  disabled={isSubmitting}
                 />
-                <Button className="bg-gradient-primary hover:bg-gradient-secondary">
-                  Subscribe
+                <Button 
+                  type="submit" 
+                  className="bg-gradient-primary hover:bg-gradient-secondary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "..." : "Subscribe"}
                 </Button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
