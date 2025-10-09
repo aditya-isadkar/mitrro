@@ -48,27 +48,35 @@ const Contact = () => {
       const fullName = `${data.firstName} ${data.lastName}`;
       const detailedMessage = `Subject: ${data.subject}\nCompany: ${data.company}\n\n${data.message}`;
       
-      const { error } = await supabase
+      const { data: insertedData, error } = await supabase
         .from('contact_inquiries')
         .insert({
           name: fullName,
           email: data.email,
           phone: data.phone,
           message: detailedMessage,
-        });
+        })
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase insert error:", error);
+        throw error;
+      }
 
+      console.log("Contact form submitted successfully:", insertedData);
+      
       setIsSubmitted(true);
+      form.reset();
+      
       toast({
         title: "Message Sent!",
         description: "We've received your message and will respond within 24 hours.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting contact form:", error);
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: error?.message || "Failed to send message. Please try again.",
         variant: "destructive",
       });
     }

@@ -26,17 +26,24 @@ const Footer = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { data: insertedData, error } = await supabase
         .from('newsletter_subscriptions')
-        .insert({ email });
+        .insert({ email })
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Newsletter subscription error:", error);
+        throw error;
+      }
 
+      console.log("Newsletter subscription successful:", insertedData);
+
+      setEmail("");
+      
       toast({
         title: "Subscribed!",
         description: "You've successfully subscribed to our newsletter.",
       });
-      setEmail("");
     } catch (error: any) {
       console.error("Error subscribing to newsletter:", error);
       if (error.code === '23505') {
@@ -48,7 +55,7 @@ const Footer = () => {
       } else {
         toast({
           title: "Error",
-          description: "Failed to subscribe. Please try again.",
+          description: error?.message || "Failed to subscribe. Please try again.",
           variant: "destructive",
         });
       }
