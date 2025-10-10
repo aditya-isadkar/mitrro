@@ -4,85 +4,71 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Grid, List, Star, Award } from "lucide-react";
+import { Search, Filter, Grid, List, Star, Award, Building2, Globe, Calendar } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const Brands = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState<typeof brands[0] | null>(null);
 
   const brands = [
     {
       id: 1,
-      name: "Melange",
-      description: "Premium sanitization solutions with advanced formulations",
-      productCount: 24,
-      logo: "/placeholder.svg",
-      rating: 4.8,
-      featured: true,
-      categories: ["Sanitizers", "Disinfectants", "Personal Care"],
-      established: "2018",
-      country: "India"
-    },
-    {
-      id: 2,
-      name: "Samson",
-      description: "Professional spraying equipment and agricultural solutions",
-      productCount: 18,
-      logo: "/placeholder.svg", 
-      rating: 4.6,
-      featured: true,
-      categories: ["Spraying Equipment", "Agricultural Tools"],
-      established: "2015",
-      country: "India"
-    },
-    {
-      id: 3,
-      name: "MediCore",
-      description: "Trusted medical equipment and diagnostic devices",
-      productCount: 45,
-      logo: "/placeholder.svg",
-      rating: 4.9,
-      featured: false,
-      categories: ["Medical Equipment", "Diagnostics", "Monitoring"],
-      established: "2010",
-      country: "Germany"
-    },
-    {
-      id: 4,
-      name: "SafeGuard Pro",
-      description: "Professional-grade protective equipment and safety solutions",
-      productCount: 67,
+      name: "NIPRO",
+      description: "Leading manufacturer of disposable medical products, dialysis equipment, and artificial organs",
+      productCount: 156,
       logo: "/placeholder.svg",
       rating: 4.7,
       featured: true,
-      categories: ["PPE", "Safety Equipment", "Protection"],
-      established: "2012",
-      country: "USA"
+      categories: ["Dialysis Equipment", "Syringes", "IV Sets", "Blood Bags", "Medical Devices"],
+      established: "1954",
+      country: "Japan",
+      products: ["Disposable Syringes", "IV Cannulas", "Blood Collection Tubes", "Dialysis Machines", "Needles", "Infusion Sets"],
+      about: "NIPRO Corporation is a major Japanese manufacturer specializing in dialysis and artificial organ technology. With decades of innovation, NIPRO provides high-quality disposable medical devices used in hospitals worldwide."
     },
     {
-      id: 5,
-      name: "CleanTech Solutions",
-      description: "Innovative cleaning and sanitization technology",
-      productCount: 32,
-      logo: "/placeholder.svg",
-      rating: 4.5,
-      featured: false,
-      categories: ["Cleaning Solutions", "Technology", "Industrial"],
-      established: "2019",
-      country: "Netherlands"
+      id: 2,
+      name: "ROMSONS",
+      description: "Trusted Indian manufacturer of medical disposables and healthcare products",
+      productCount: 180,
+      logo: "/placeholder.svg", 
+      rating: 3.7,
+      featured: true,
+      categories: ["Medical Disposables", "Surgical Products", "Respiratory Care", "Wound Care"],
+      established: "1989",
+      country: "India",
+      products: ["Surgical Gloves", "Face Masks", "Catheters", "Oxygen Masks", "Nebulizers", "IV Sets", "Surgical Drapes"],
+      about: "ROMSONS Group is one of India's leading manufacturers of medical disposables. With state-of-the-art manufacturing facilities, ROMSONS provides affordable, quality healthcare products to hospitals and clinics across India and internationally."
     },
     {
-      id: 6,
-      name: "LabExpert",
-      description: "Comprehensive laboratory supplies and equipment",
-      productCount: 89,
+      id: 3,
+      name: "Dr. Morepen",
+      description: "Leading healthcare brand offering diagnostic devices and health monitoring solutions",
+      productCount: 95,
       logo: "/placeholder.svg",
-      rating: 4.8,
-      featured: false,
-      categories: ["Laboratory", "Research", "Testing Equipment"],
-      established: "2008",
-      country: "Switzerland"
+      rating: 4.3,
+      featured: true,
+      categories: ["Blood Glucose Monitors", "BP Monitors", "Thermometers", "Pulse Oximeters", "Health Devices"],
+      established: "1984",
+      country: "India",
+      products: ["Glucometers", "Blood Pressure Monitors", "Digital Thermometers", "Pulse Oximeters", "Nebulizers", "Weighing Scales"],
+      about: "Dr. Morepen is a pioneering Indian healthcare brand committed to making quality healthcare accessible. Known for innovative diagnostic devices and health monitoring equipment, Dr. Morepen empowers individuals to manage their health at home."
+    },
+    {
+      id: 4,
+      name: "3M Healthcare",
+      description: "Global leader in medical supplies, surgical products, and infection prevention solutions",
+      productCount: 320,
+      logo: "/placeholder.svg",
+      rating: 4.9,
+      featured: true,
+      categories: ["Surgical Supplies", "Wound Care", "Infection Prevention", "Medical Tapes", "PPE"],
+      established: "1902",
+      country: "USA",
+      products: ["Tegaderm Dressings", "Surgical Tapes", "Sterilization Products", "N95 Respirators", "Skin Prep Solutions", "Medical Drapes"],
+      about: "3M Healthcare is a division of 3M Company, bringing over a century of innovation to medical care. Trusted by healthcare professionals worldwide, 3M provides advanced medical solutions for surgical procedures, wound management, and infection prevention."
     }
   ];
 
@@ -156,7 +142,7 @@ const Brands = () => {
             <Button className="flex-1">
               View Products
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => setSelectedBrand(brand)}>
               Brand Info
             </Button>
           </div>
@@ -264,6 +250,90 @@ const Brands = () => {
           </div>
         )}
       </main>
+
+      {/* Brand Info Dialog */}
+      <Dialog open={!!selectedBrand} onOpenChange={() => setSelectedBrand(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl flex items-center gap-3">
+              <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
+                <span className="text-xl font-bold text-primary">
+                  {selectedBrand?.name.charAt(0)}
+                </span>
+              </div>
+              {selectedBrand?.name}
+            </DialogTitle>
+            <DialogDescription>
+              {selectedBrand?.description}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6">
+            {/* Company Details */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-xs text-muted-foreground">Country</p>
+                  <p className="font-medium">{selectedBrand?.country}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-xs text-muted-foreground">Established</p>
+                  <p className="font-medium">{selectedBrand?.established}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-xs text-muted-foreground">Products</p>
+                  <p className="font-medium">{selectedBrand?.productCount}+</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Rating */}
+            <div className="flex items-center gap-2 p-4 bg-muted rounded-lg">
+              <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+              <span className="text-2xl font-bold">{selectedBrand?.rating}</span>
+              <span className="text-muted-foreground">/ 5.0</span>
+            </div>
+
+            {/* About */}
+            <div>
+              <h3 className="font-semibold mb-2">About {selectedBrand?.name}</h3>
+              <p className="text-sm text-muted-foreground">{selectedBrand?.about}</p>
+            </div>
+
+            {/* Categories */}
+            <div>
+              <h3 className="font-semibold mb-2">Product Categories</h3>
+              <div className="flex flex-wrap gap-2">
+                {selectedBrand?.categories.map((category, idx) => (
+                  <Badge key={idx} variant="secondary">
+                    {category}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Featured Products */}
+            <div>
+              <h3 className="font-semibold mb-2">Featured Products</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {selectedBrand?.products.map((product, idx) => (
+                  <div key={idx} className="text-sm p-2 bg-muted rounded flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    {product}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
