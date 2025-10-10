@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      brand_inquiries: {
+        Row: {
+          brand_name: string
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          inquiry_message: string
+          status: string
+        }
+        Insert: {
+          brand_name: string
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          inquiry_message: string
+          status?: string
+        }
+        Update: {
+          brand_name?: string
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          inquiry_message?: string
+          status?: string
+        }
+        Relationships: []
+      }
       contact_inquiries: {
         Row: {
           created_at: string

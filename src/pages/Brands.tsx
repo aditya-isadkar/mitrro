@@ -4,14 +4,28 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Grid, List, Star, Award, Building2, Globe, Calendar } from "lucide-react";
+import { Search, Filter, Grid, List, Star, Award, Building2, Globe, Calendar, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Brands = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<typeof brands[0] | null>(null);
+  const [inquiryBrand, setInquiryBrand] = useState<typeof brands[0] | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
+  const [inquiryForm, setInquiryForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
 
   const brands = [
     {
@@ -81,6 +95,51 @@ const Brands = () => {
   const featuredBrands = filteredBrands.filter(brand => brand.featured);
   const otherBrands = filteredBrands.filter(brand => !brand.featured);
 
+  const handleInquirySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!inquiryBrand) return;
+    
+    setIsSubmitting(true);
+
+    try {
+      const { data: insertedData, error } = await supabase
+        .from('brand_inquiries')
+        .insert({
+          brand_name: inquiryBrand.name,
+          customer_name: inquiryForm.name.trim(),
+          customer_email: inquiryForm.email.trim(),
+          customer_phone: inquiryForm.phone.trim() || null,
+          inquiry_message: inquiryForm.message.trim(),
+        })
+        .select();
+
+      if (error) {
+        console.error("Brand inquiry error:", error);
+        throw error;
+      }
+
+      console.log("Brand inquiry submitted successfully:", insertedData);
+
+      setInquiryForm({ name: "", email: "", phone: "", message: "" });
+      setInquiryBrand(null);
+      
+      toast({
+        title: "Inquiry Submitted!",
+        description: "We've received your inquiry and will respond soon.",
+      });
+    } catch (error: any) {
+      console.error("Error submitting brand inquiry:", error);
+      toast({
+        title: "Error",
+        description: error?.message || "Failed to submit inquiry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const BrandCard = ({ brand, index }: { brand: typeof brands[0], index: number }) => (
     <Card 
       className="hover:shadow-lg transition-shadow cursor-pointer animate-fade-in relative"
@@ -139,8 +198,9 @@ const Brands = () => {
           </div>
           
           <div className="flex gap-2 pt-2">
-            <Button className="flex-1">
-              View Products
+            <Button className="flex-1" onClick={() => setInquiryBrand(brand)}>
+              <Mail className="h-4 w-4 mr-2" />
+              Product Inquiry
             </Button>
             <Button variant="outline" size="sm" onClick={() => setSelectedBrand(brand)}>
               Brand Info
@@ -250,6 +310,77 @@ const Brands = () => {
           </div>
         )}
       </main>
+
+      {/* Product Inquiry Dialog */}
+      <Dialog open={!!inquiryBrand} onOpenChange={() => {
+        setInquiryBrand(null);
+        setInquiryForm({ name: "", email: "", phone: "", message: "" });
+      }}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Product Inquiry - {inquiryBrand?.name}</DialogTitle>
+            <DialogDescription>
+              Send us your inquiry about {inquiryBrand?.name} products and we'll get back to you soon.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <form onSubmit={handleInquirySubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Your Name *</Label>
+              <Input
+                id="name"
+                required
+                value={inquiryForm.name}
+                onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
+                placeholder="Enter your full name"
+                maxLength={100}
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="email">Email Address *</Label>
+              <Input
+                id="email"
+                type="email"
+                required
+                value={inquiryForm.email}
+                onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
+                placeholder="your.email@example.com"
+                maxLength={255}
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={inquiryForm.phone}
+                onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
+                placeholder="+1 (555) 000-0000"
+                maxLength={20}
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="message">Your Inquiry *</Label>
+              <Textarea
+                id="message"
+                required
+                value={inquiryForm.message}
+                onChange={(e) => setInquiryForm({ ...inquiryForm, message: e.target.value })}
+                placeholder="Tell us about your product inquiry..."
+                rows={4}
+                maxLength={1000}
+              />
+            </div>
+            
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit Inquiry"}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       {/* Brand Info Dialog */}
       <Dialog open={!!selectedBrand} onOpenChange={() => setSelectedBrand(null)}>
