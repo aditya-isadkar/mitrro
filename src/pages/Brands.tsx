@@ -253,7 +253,7 @@ const Brands = () => {
 
       {/* Brand Info Dialog */}
       <Dialog open={!!selectedBrand} onOpenChange={() => setSelectedBrand(null)}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] flex flex-col">
           <DialogHeader>
             <DialogTitle className="text-2xl flex items-center gap-3">
               <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
@@ -268,7 +268,7 @@ const Brands = () => {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-6">
+          <div className="space-y-6 overflow-y-auto pr-2">
             {/* Company Details */}
             <div className="grid grid-cols-3 gap-4">
               <div className="flex items-center gap-2">
