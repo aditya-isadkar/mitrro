@@ -103,23 +103,22 @@ const Brands = () => {
     setIsSubmitting(true);
 
     try {
-      const { data: insertedData, error } = await supabase
-        .from('brand_inquiries')
-        .insert({
+      const { data, error } = await supabase.functions.invoke('submit-brand-inquiry', {
+        body: {
           brand_name: inquiryBrand.name,
           customer_name: inquiryForm.name.trim(),
           customer_email: inquiryForm.email.trim(),
           customer_phone: inquiryForm.phone.trim() || null,
           inquiry_message: inquiryForm.message.trim(),
-        })
-        .select();
+        },
+      });
 
       if (error) {
         console.error("Brand inquiry error:", error);
         throw error;
       }
 
-      console.log("Brand inquiry submitted successfully:", insertedData);
+      console.log("Brand inquiry submitted successfully:", data);
 
       setInquiryForm({ name: "", email: "", phone: "", message: "" });
       setInquiryBrand(null);
