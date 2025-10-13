@@ -578,7 +578,11 @@ const Blog = () => {
                 <p className="text-muted-foreground mb-4">
                   Latest developments and emerging trends in pharmaceutical and healthcare industries.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.open('https://www.google.com/search?q=pharmaceutical+industry+trends+2025', '_blank')}
+                >
                   Explore Trends
                 </Button>
               </CardContent>
@@ -593,7 +597,11 @@ const Blog = () => {
                 <p className="text-muted-foreground mb-4">
                   Best practices and innovations for improving patient outcomes and healthcare delivery.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.open('https://www.google.com/search?q=patient+care+best+practices+healthcare', '_blank')}
+                >
                   Learn More
                 </Button>
               </CardContent>
@@ -608,7 +616,11 @@ const Blog = () => {
                 <p className="text-muted-foreground mb-4">
                   Stay compliant with the latest regulatory changes and industry standards.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.open('https://www.google.com/search?q=pharmaceutical+regulatory+updates+compliance', '_blank')}
+                >
                   View Updates
                 </Button>
               </CardContent>
