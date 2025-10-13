@@ -18,20 +18,20 @@ const Hero = () => {
           <div className="text-white space-y-6 animate-fade-in">
             <div className="inline-block">
               <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                Medical Solutions Available
+                Advanced Medical Technology
               </span>
             </div>
             
             <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-              COVID-19 VACCINE
+              Next-Generation Healthcare Solutions
             </h1>
             
             <p className="text-xl lg:text-2xl text-white/90 max-w-lg leading-relaxed">
-              BE THE PART OF THE WORLD'S LARGEST VACCINATION DRIVE.
+              Empowering healthcare with AI, robotics, and cutting-edge medical devices.
             </p>
             
             <p className="text-lg text-white/80 max-w-lg">
-              Professional medical equipment, sanitizers, and health solutions trusted by healthcare providers worldwide.
+              From smart diagnostics to precision surgical equipment, discover the future of medicine with technology-driven healthcare solutions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">

@@ -2,42 +2,43 @@ import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import sanitizerImage from "@/assets/product-sanitizer.jpg";
-import sprayerImage from "@/assets/product-sprayer.jpg";
-import atomizerImage from "@/assets/product-atomizer.jpg";
+import monitorImage from "@/assets/product-monitor.jpg";
+import ultrasoundImage from "@/assets/product-ultrasound.jpg";
+import defibrillatorImage from "@/assets/product-defibrillator.jpg";
+import surgicalLightImage from "@/assets/product-surgical-light.jpg";
 
 const FeaturedProducts = () => {
   const products = [
     {
       id: "1",
-      name: "Melange Room Sanitizer Spray",
-      price: 250,
-      originalPrice: 350,
-      image: sanitizerImage,
-      category: "Sanitizer"
+      name: "Advanced Patient Monitor System",
+      price: 45000,
+      originalPrice: 52000,
+      image: monitorImage,
+      category: "Monitoring Equipment"
     },
     {
       id: "2",
-      name: "Samson Knapsack Sprayer",
-      price: 400,
-      originalPrice: 450,
-      image: sprayerImage,
-      category: "Equipment"
+      name: "Digital Ultrasound Machine",
+      price: 85000,
+      originalPrice: 95000,
+      image: ultrasoundImage,
+      category: "Diagnostic Imaging"
     },
     {
       id: "3",
-      name: "Atomization Machine for Office",
-      price: 400,
-      image: atomizerImage,
-      category: "Medical Device"
+      name: "Smart Defibrillator AED",
+      price: 32000,
+      image: defibrillatorImage,
+      category: "Emergency Equipment"
     },
     {
       id: "4",
-      name: "Professional Sanitizer Spray Machine",
-      price: 600,
-      originalPrice: 750,
-      image: sanitizerImage,
-      category: "Professional"
+      name: "LED Surgical Light System",
+      price: 28000,
+      originalPrice: 35000,
+      image: surgicalLightImage,
+      category: "Surgical Equipment"
     }
   ];
 
@@ -53,8 +54,8 @@ const FeaturedProducts = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover our top-quality medical and sanitization products, 
-            trusted by healthcare professionals worldwide.
+            Explore state-of-the-art medical devices and technology solutions 
+            trusted by leading healthcare facilities worldwide.
           </p>
         </div>
 
