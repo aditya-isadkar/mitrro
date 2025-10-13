@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Calendar, User, Clock, Search, ArrowRight, TrendingUp, Heart, Shield } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const blogPosts = [
   {
@@ -305,6 +307,57 @@ const Blog = () => {
   const [selectedBlog, setSelectedBlog] = useState<typeof blogPosts[0] | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [visiblePosts, setVisiblePosts] = useState(6);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!newsletterEmail || !newsletterEmail.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert({ email: newsletterEmail });
+
+      if (error) {
+        throw error;
+      }
+
+      setNewsletterEmail("");
+      
+      toast({
+        title: "Subscribed!",
+        description: "You've successfully subscribed to our newsletter.",
+      });
+    } catch (error: any) {
+      if (error.code === '23505') {
+        toast({
+          title: "Already Subscribed",
+          description: "This email is already subscribed to our newsletter.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: error?.message || "Failed to subscribe. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -488,15 +541,24 @@ const Blog = () => {
             Subscribe to our newsletter for the latest pharmaceutical industry insights, product updates, and expert analysis.
           </p>
           <div className="max-w-md mx-auto">
-            <div className="flex gap-4">
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-4">
               <Input
+                type="email"
                 placeholder="Enter your email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/70 focus:bg-white/20"
+                disabled={isSubmitting}
               />
-              <Button variant="secondary" className="text-primary whitespace-nowrap">
-                Subscribe
+              <Button 
+                type="submit" 
+                variant="outline" 
+                className="bg-white text-primary hover:bg-white/90 hover:text-primary border-white whitespace-nowrap"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "..." : "Subscribe"}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
