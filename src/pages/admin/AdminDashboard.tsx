@@ -20,6 +20,7 @@ const AdminDashboard = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [profiles, setProfiles] = useState<any[]>([]);
   const [brandInquiries, setBrandInquiries] = useState<any[]>([]);
+  const [businessRegistrations, setBusinessRegistrations] = useState<any[]>([]);
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
@@ -35,13 +36,14 @@ const AdminDashboard = () => {
 
   const fetchAllData = async () => {
     try {
-      const [contactsRes, newslettersRes, logsRes, ordersRes, profilesRes, brandInquiriesRes] = await Promise.all([
+      const [contactsRes, newslettersRes, logsRes, ordersRes, profilesRes, brandInquiriesRes, businessRegRes] = await Promise.all([
         supabase.from('contact_inquiries').select('*').order('created_at', { ascending: false }),
         supabase.from('newsletter_subscriptions').select('*').order('subscribed_at', { ascending: false }),
         supabase.from('login_logs').select('*').order('created_at', { ascending: false }),
         supabase.from('orders').select('*, order_items(*)').order('created_at', { ascending: false }),
         supabase.from('profiles').select('*').order('created_at', { ascending: false }),
         supabase.from('brand_inquiries').select('*').order('created_at', { ascending: false }),
+        supabase.from('business_registrations').select('*').order('created_at', { ascending: false }),
       ]);
 
       if (contactsRes.error) throw contactsRes.error;
@@ -50,6 +52,7 @@ const AdminDashboard = () => {
       if (ordersRes.error) throw ordersRes.error;
       if (profilesRes.error) throw profilesRes.error;
       if (brandInquiriesRes.error) throw brandInquiriesRes.error;
+      if (businessRegRes.error) throw businessRegRes.error;
 
       setContacts(contactsRes.data || []);
       setNewsletters(newslettersRes.data || []);
@@ -57,6 +60,7 @@ const AdminDashboard = () => {
       setOrders(ordersRes.data || []);
       setProfiles(profilesRes.data || []);
       setBrandInquiries(brandInquiriesRes.data || []);
+      setBusinessRegistrations(businessRegRes.data || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -99,7 +103,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Contact Inquiries</CardTitle>
@@ -117,6 +121,16 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{brandInquiries.length}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Business Registrations</CardTitle>
+              <Building2 className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{businessRegistrations.length}</div>
             </CardContent>
           </Card>
           
@@ -156,6 +170,7 @@ const AdminDashboard = () => {
           <TabsList>
             <TabsTrigger value="contacts">Contact Inquiries</TabsTrigger>
             <TabsTrigger value="brands">Brand Inquiries</TabsTrigger>
+            <TabsTrigger value="business">Business Registrations</TabsTrigger>
             <TabsTrigger value="newsletters">Newsletters</TabsTrigger>
             <TabsTrigger value="logs">Login Logs</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
@@ -224,6 +239,43 @@ const AdminDashboard = () => {
                         <TableCell className="max-w-xs truncate">{inquiry.inquiry_message}</TableCell>
                         <TableCell className="capitalize">{inquiry.status}</TableCell>
                         <TableCell>{new Date(inquiry.created_at).toLocaleDateString()}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="business">
+            <Card>
+              <CardHeader>
+                <CardTitle>Business Registrations</CardTitle>
+                <CardDescription>Partner registration applications</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Company</TableHead>
+                      <TableHead>Contact Person</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>Phone</TableHead>
+                      <TableHead>Business Type</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {businessRegistrations.map((reg) => (
+                      <TableRow key={reg.id}>
+                        <TableCell className="font-medium">{reg.company_name}</TableCell>
+                        <TableCell>{reg.contact_person}</TableCell>
+                        <TableCell>{reg.email}</TableCell>
+                        <TableCell>{reg.phone}</TableCell>
+                        <TableCell className="capitalize">{reg.business_type}</TableCell>
+                        <TableCell className="capitalize">{reg.status}</TableCell>
+                        <TableCell>{new Date(reg.created_at).toLocaleDateString()}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

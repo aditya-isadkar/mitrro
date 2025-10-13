@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Building2, Users, TrendingUp, Shield, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const businessFormSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
@@ -57,13 +58,41 @@ const SaleOnMitrro = () => {
     },
   });
 
-  const onSubmit = (data: BusinessFormData) => {
-    console.log("Business registration data:", data);
-    setIsSubmitted(true);
-    toast({
-      title: "Registration Submitted!",
-      description: "We'll review your application and contact you within 2-3 business days.",
-    });
+  const onSubmit = async (data: BusinessFormData) => {
+    try {
+      const { error } = await supabase
+        .from('business_registrations')
+        .insert({
+          company_name: data.companyName,
+          contact_person: data.contactPerson,
+          email: data.email,
+          phone: data.phone,
+          business_type: data.businessType,
+          business_size: data.businessSize,
+          annual_revenue: data.annualRevenue,
+          website: data.website || null,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          zip_code: data.zipCode,
+          description: data.description,
+        });
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast({
+        title: "Registration Submitted!",
+        description: "We'll review your application and contact you within 2-3 business days.",
+      });
+    } catch (error) {
+      console.error("Error submitting registration:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your registration. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (isSubmitted) {

@@ -47,6 +47,63 @@ export type Database = {
         }
         Relationships: []
       }
+      business_registrations: {
+        Row: {
+          address: string
+          annual_revenue: string
+          business_size: string
+          business_type: string
+          city: string
+          company_name: string
+          contact_person: string
+          created_at: string
+          description: string
+          email: string
+          id: string
+          phone: string
+          state: string
+          status: string
+          website: string | null
+          zip_code: string
+        }
+        Insert: {
+          address: string
+          annual_revenue: string
+          business_size: string
+          business_type: string
+          city: string
+          company_name: string
+          contact_person: string
+          created_at?: string
+          description: string
+          email: string
+          id?: string
+          phone: string
+          state: string
+          status?: string
+          website?: string | null
+          zip_code: string
+        }
+        Update: {
+          address?: string
+          annual_revenue?: string
+          business_size?: string
+          business_type?: string
+          city?: string
+          company_name?: string
+          contact_person?: string
+          created_at?: string
+          description?: string
+          email?: string
+          id?: string
+          phone?: string
+          state?: string
+          status?: string
+          website?: string | null
+          zip_code?: string
+        }
+        Relationships: []
+      }
       contact_inquiries: {
         Row: {
           created_at: string
