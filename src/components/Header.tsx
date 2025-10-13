@@ -134,11 +134,9 @@ const Header = () => {
               <Button variant="ghost" className="font-medium">Blog</Button>
             </Link>
             <div className="ml-auto">
-              <Link to="/sale-on-mitrro">
-                <Button className="bg-gradient-primary hover:opacity-90">
-                  Special Offer
-                </Button>
-              </Link>
+              <Button className="bg-gradient-primary hover:opacity-90" disabled>
+                Special Offer
+              </Button>
             </div>
           </nav>
         </div>

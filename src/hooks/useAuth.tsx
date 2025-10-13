@@ -39,17 +39,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+
+    // Log the login action
+    if (!error && data.user) {
+      try {
+        await supabase.from('login_logs').insert({
+          user_id: data.user.id,
+          email: data.user.email || email,
+          action: 'login',
+        });
+      } catch (logError) {
+        // Silently fail if logging doesn't work
+        console.error('Failed to log login:', logError);
+      }
+    }
+
     return { error };
   };
 
   const signUp = async (email: string, password: string, fullName: string, phone: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -60,6 +75,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         },
       },
     });
+
+    // Log the signup action
+    if (!error && data.user) {
+      try {
+        await supabase.from('login_logs').insert({
+          user_id: data.user.id,
+          email: data.user.email || email,
+          action: 'signup',
+        });
+      } catch (logError) {
+        // Silently fail if logging doesn't work
+        console.error('Failed to log signup:', logError);
+      }
+    }
+
     return { error };
   };
 
