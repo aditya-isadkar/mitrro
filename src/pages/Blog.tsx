@@ -23,62 +23,278 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: "COVID-19 Vaccine Distribution: Lessons Learned",
-    excerpt: "Analyzing the global vaccine rollout and how it transformed pharmaceutical logistics and emergency response protocols.",
-    content: "The COVID-19 vaccine distribution effort represented one of the largest and most complex pharmaceutical logistics operations in history. The challenges were unprecedented: ultra-cold storage requirements, global coordination across diverse healthcare systems, and the urgency to vaccinate billions of people in record time.\n\nOne of the most significant lessons learned was the critical importance of cold chain infrastructure. mRNA vaccines requiring storage at -70°C pushed the limits of existing logistics networks and spurred rapid innovation in portable freezer technology and temperature monitoring systems. Pharmaceutical companies and distributors had to rapidly scale up their cold chain capabilities, leading to investments that will benefit the industry long after the pandemic.\n\nThe crisis also highlighted the need for better data sharing and coordination between public health authorities, manufacturers, and distributors. Countries that established centralized tracking systems and transparent data-sharing protocols achieved more efficient distribution and higher vaccination rates. This experience has led to calls for standardized global frameworks for emergency pharmaceutical distribution.\n\nAnother key takeaway was the importance of flexibility and redundancy in supply chains. Organizations with diversified manufacturing sites and transportation partnerships were better able to navigate disruptions. Moving forward, the pharmaceutical industry is likely to maintain higher inventory levels and more diverse supplier networks to ensure resilience against future crises.",
-    author: "Dr. Michael Chen",
-    date: "March 10, 2024",
-    readTime: "6 min read",
-    category: "Healthcare",
-    image: "/src/assets/product-sanitizer.jpg",
+    title: "Emerging Markets in Global Pharmaceutical Distribution",
+    excerpt: "Analyzing growth opportunities and challenges in developing pharmaceutical markets across Asia, Africa, and Latin America.",
+    content: "Emerging markets represent the next frontier for pharmaceutical growth, with rapidly expanding middle classes, improving healthcare infrastructure, and increasing government investment in public health. However, success in these markets requires understanding unique challenges including regulatory variations, distribution complexities, and pricing sensitivities.\n\nAsia-Pacific markets, particularly India, China, and Southeast Asia, are experiencing explosive growth in pharmaceutical demand. These markets offer tremendous opportunities but also require localized strategies that account for diverse regulatory environments, cultural preferences, and healthcare delivery models. Companies that invest in local partnerships and adapt their products and services to local needs are seeing the strongest results.\n\nAfrica presents both challenges and opportunities, with a growing population, increasing disease burden, and significant infrastructure gaps. Innovative distribution models, including drone delivery for remote areas and mobile health technologies, are helping overcome traditional barriers. Public-private partnerships are proving essential for expanding access while building sustainable business models.\n\nLatin American markets are maturing rapidly, with countries like Brazil, Mexico, and Colombia modernizing their healthcare systems and expanding insurance coverage. Understanding local reimbursement systems, building relationships with key opinion leaders, and navigating complex import regulations are critical success factors in these markets.",
+    author: "Dr. Sarah Johnson",
+    date: "March 12, 2024",
+    readTime: "7 min read",
+    category: "Industry Insights",
+    image: "/src/assets/product-monitor.jpg",
     featured: false,
   },
   {
     id: 3,
-    title: "Quality Assurance in Medical Device Manufacturing",
-    excerpt: "Best practices for ensuring medical device quality, compliance, and safety throughout the manufacturing process.",
-    content: "Quality assurance in medical device manufacturing is not just a regulatory requirement—it's a moral imperative that directly impacts patient safety. The complexity of modern medical devices demands rigorous quality control processes at every stage, from design and development through production and post-market surveillance.\n\nA robust quality management system (QMS) forms the foundation of successful medical device manufacturing. ISO 13485 certification has become the global standard, providing a framework for consistent quality processes. Leading manufacturers go beyond minimum requirements, implementing advanced statistical process control, automated inspection systems, and comprehensive documentation practices that ensure full traceability.\n\nRisk management is central to quality assurance, with ISO 14971 providing guidelines for identifying, evaluating, and controlling risks throughout a device's lifecycle. This proactive approach helps manufacturers anticipate potential issues before they reach patients. Modern quality systems increasingly incorporate real-world evidence and post-market data to continuously improve products and processes.\n\nHuman factors engineering has emerged as a critical component of quality assurance, recognizing that even well-designed devices can fail if they don't account for how healthcare professionals actually use them. Usability testing and human factors validation studies are now essential parts of the development process, helping ensure that devices perform safely and effectively in real-world clinical settings.",
+    title: "Biosimilars Market Dynamics and Distribution Strategies",
+    excerpt: "Understanding the growing biosimilars market and effective strategies for distribution and market penetration.",
+    content: "The biosimilars market is transforming the pharmaceutical landscape, offering cost-effective alternatives to expensive biologic therapies while creating new opportunities and challenges for distributors. As patents expire on major biologics, the biosimilars market is projected to grow exponentially, requiring sophisticated distribution strategies and stakeholder education.\n\nKey to biosimilar success is building confidence among physicians and patients. Unlike generic small molecules, biosimilars are not identical copies but highly similar versions of reference biologics. This requires extensive education programs, robust pharmacovigilance systems, and transparent communication about manufacturing processes and clinical data. Distributors play a crucial role in this education effort, serving as trusted advisors to healthcare providers.\n\nReimbursement and formulary access present unique challenges for biosimilars. While they offer cost savings, securing payer coverage and favorable formulary positioning requires demonstrating value beyond just price. Successful biosimilar distributors work closely with manufacturers to develop compelling value propositions and support market access initiatives.\n\nCold chain management is particularly critical for biosimilar distribution, as these products are temperature-sensitive biologics requiring consistent refrigeration. Investment in validated cold chain infrastructure, real-time temperature monitoring, and rapid response protocols for temperature excursions is essential for maintaining product integrity and patient safety.",
+    author: "Dr. Michael Chen",
+    date: "March 9, 2024",
+    readTime: "8 min read",
+    category: "Industry Insights",
+    image: "/src/assets/product-ultrasound.jpg",
+    featured: false,
+  },
+  {
+    id: 4,
+    title: "Pharmaceutical Industry M&A Trends and Implications",
+    excerpt: "Examining recent mergers and acquisitions in the pharmaceutical sector and their impact on distribution networks.",
+    content: "Merger and acquisition activity in the pharmaceutical industry continues at a robust pace, driven by patent cliffs, pipeline gaps, and the quest for innovation. These transactions reshape competitive landscapes and create both opportunities and challenges for pharmaceutical distributors who must adapt to changing supplier relationships and market dynamics.\n\nRecent mega-mergers have consolidated manufacturing and R&D capabilities while creating global giants with enhanced negotiating power. For distributors, this consolidation can lead to changes in pricing structures, distribution agreements, and service expectations. Successful distributors proactively engage with both acquiring and acquired companies to ensure continuity and identify opportunities for expanded partnerships.\n\nThe rise of specialty pharmaceuticals has driven a wave of targeted acquisitions, with large pharma companies acquiring smaller biotech firms with promising pipelines. This trend is reshaping distribution channels, as specialty products often require unique handling capabilities, patient support services, and reimbursement support. Distributors investing in specialty capabilities are well-positioned to capture this high-value segment.\n\nVertical integration is another significant trend, with some pharmaceutical companies acquiring or partnering with distributors to gain greater control over their supply chains. This development is forcing traditional distributors to clearly articulate their value proposition and differentiate through services like data analytics, inventory management, and clinical support programs.",
     author: "Lisa Rodriguez",
-    date: "March 8, 2024",
-    readTime: "5 min read",
+    date: "March 6, 2024",
+    readTime: "6 min read",
+    category: "Industry Insights",
+    image: "/src/assets/product-defibrillator.jpg",
+    featured: false,
+  },
+  {
+    id: 5,
+    title: "Telemedicine and Remote Patient Monitoring Integration",
+    excerpt: "How digital health technologies are transforming patient care delivery and creating new pharmaceutical distribution opportunities.",
+    content: "Telemedicine has evolved from a convenience to a necessity, accelerated by the pandemic and now a permanent fixture in healthcare delivery. This shift is creating new opportunities for pharmaceutical distributors to support remote patient care through integrated medication management, direct-to-patient delivery, and virtual consultation support.\n\nRemote patient monitoring (RPM) technologies are generating unprecedented amounts of health data that can inform medication management and improve outcomes. Smart devices track everything from blood pressure and glucose levels to medication adherence and side effects. Pharmaceutical distributors who can integrate with these digital health platforms and provide data-driven insights will become invaluable partners to healthcare providers.\n\nThe growth of virtual care is driving demand for direct-to-patient pharmaceutical delivery services. Patients expect the same convenience from healthcare that they receive from other e-commerce experiences. Distributors investing in robust e-commerce platforms, patient-friendly packaging, and reliable home delivery services are capturing market share in this rapidly growing segment.\n\nTelehealth platforms are partnering with pharmaceutical distributors to create seamless care experiences where consultations, prescriptions, and medication delivery are integrated into a single digital journey. These partnerships require sophisticated technology integration, strong data security measures, and patient-centered service design.",
+    author: "Dr. Sarah Johnson",
+    date: "March 11, 2024",
+    readTime: "7 min read",
+    category: "Healthcare",
+    image: "/src/assets/product-monitor.jpg",
+    featured: false,
+  },
+  {
+    id: 6,
+    title: "Precision Medicine and Personalized Treatment Approaches",
+    excerpt: "Understanding how genomic medicine and biomarker-driven therapies are reshaping pharmaceutical development and distribution.",
+    content: "Precision medicine represents a paradigm shift from one-size-fits-all treatments to therapies tailored to individual patient characteristics, genetics, and disease profiles. This transformation is creating new complexities for pharmaceutical distribution while offering opportunities to deliver superior patient outcomes and value-based care.\n\nGenomic testing and biomarker analysis are becoming standard practice for many conditions, particularly in oncology. These diagnostics guide treatment selection, ensuring patients receive therapies most likely to benefit them while avoiding ineffective treatments and unnecessary side effects. Distributors must understand companion diagnostics and coordinate the distribution of both diagnostic tests and corresponding therapies.\n\nPersonalized medicine often involves complex, high-value specialty medications requiring special handling and administration. Many are biologics with strict storage requirements, short expiration dates, and patient-specific dosing. This demands sophisticated inventory management, patient identification systems, and coordination with specialty pharmacies and infusion centers.\n\nThe economics of precision medicine are transforming pharmaceutical business models, with increasing emphasis on outcomes-based contracting and value-based pricing. Distributors supporting these arrangements need robust data collection and analysis capabilities to track patient outcomes and demonstrate value to payers and providers.",
+    author: "Dr. Michael Chen",
+    date: "March 7, 2024",
+    readTime: "8 min read",
+    category: "Healthcare",
+    image: "/src/assets/product-ultrasound.jpg",
+    featured: false,
+  },
+  {
+    id: 7,
+    title: "Mental Health Pharmaceuticals: Addressing Growing Demand",
+    excerpt: "Examining the expanding mental health crisis and pharmaceutical solutions for depression, anxiety, and other conditions.",
+    content: "Mental health has emerged as a global healthcare priority, with increasing recognition of conditions like depression, anxiety, PTSD, and bipolar disorder. The pharmaceutical industry is responding with new treatments, from traditional medications to novel approaches like ketamine-based therapies and psychedelic-assisted treatments currently in clinical trials.\n\nThe COVID-19 pandemic accelerated mental health challenges worldwide, driving increased demand for psychiatric medications and therapeutic interventions. Healthcare systems are struggling to meet this demand, creating opportunities for pharmaceutical distributors who can ensure consistent supply of critical mental health medications and support patient adherence programs.\n\nTelehealth has proven particularly effective for mental health treatment, reducing barriers to care and enabling more frequent patient-provider contact. This shift is changing how mental health medications are prescribed and distributed, with growing demand for mail-order pharmacy services and digital medication management tools that support adherence and monitor side effects.\n\nStigma reduction efforts and increased awareness are bringing more patients into treatment, expanding the market for mental health pharmaceuticals. However, this growth brings responsibility to ensure appropriate use, monitor for abuse potential with certain medications, and support comprehensive treatment approaches that combine medication with therapy and lifestyle interventions.",
+    author: "Lisa Rodriguez",
+    date: "March 4, 2024",
+    readTime: "6 min read",
+    category: "Healthcare",
+    image: "/src/assets/product-surgical-light.jpg",
+    featured: false,
+  },
+  {
+    id: 8,
+    title: "Chronic Disease Management Through Pharmaceutical Innovation",
+    excerpt: "New approaches to managing diabetes, cardiovascular disease, and other chronic conditions through advanced therapeutics.",
+    content: "Chronic diseases account for the majority of healthcare spending and represent the primary focus for pharmaceutical innovation. From next-generation diabetes treatments to novel cardiovascular therapies, the industry is developing medications that not only treat symptoms but also slow disease progression and reduce complications.\n\nDiabetes care has been revolutionized by continuous glucose monitoring, insulin pumps, and new medication classes like GLP-1 agonists that offer weight loss benefits alongside glucose control. These advances require pharmaceutical distributors to support complex care ecosystems involving multiple devices, medications, and data platforms. Integration with digital health tools is becoming essential for effective chronic disease management.\n\nCardiovascular disease remains the leading cause of death globally, driving continued innovation in lipid management, anticoagulation, and heart failure treatment. New medications offer improved efficacy and safety profiles, but successful adoption requires physician education, patient adherence support, and coordination with cardiac monitoring technologies.\n\nThe shift toward value-based care is particularly pronounced in chronic disease management, where long-term outcomes and total cost of care are emphasized over volume of medications dispensed. Distributors who can support population health management, provide patient education resources, and demonstrate improved outcomes are becoming preferred partners for health systems and payers.",
+    author: "Dr. Michael Chen",
+    date: "February 29, 2024",
+    readTime: "7 min read",
+    category: "Healthcare",
+    image: "/src/assets/product-defibrillator.jpg",
+    featured: false,
+  },
+  {
+    id: 9,
+    title: "Cloud-Based Pharmaceutical Inventory Management Systems",
+    excerpt: "Leveraging cloud technology for real-time inventory tracking, automated reordering, and supply chain optimization.",
+    content: "Cloud computing has revolutionized pharmaceutical inventory management, enabling real-time visibility, predictive analytics, and seamless collaboration across complex supply networks. Modern cloud-based systems integrate data from multiple sources to optimize inventory levels, reduce waste, and ensure product availability.\n\nReal-time inventory tracking across multiple locations provides unprecedented visibility into stock levels, expiration dates, and product movements. Cloud platforms enable distributors, pharmacies, and healthcare facilities to share information seamlessly, reducing duplicate orders, preventing stockouts, and minimizing expired inventory. This transparency improves efficiency while reducing costs throughout the supply chain.\n\nPredictive analytics powered by machine learning algorithms analyze historical usage patterns, seasonal trends, and external factors to forecast future demand with high accuracy. These systems can automatically generate purchase orders, optimize warehouse picking routes, and suggest inventory transfers between locations to balance supply and demand. The result is leaner inventory with better product availability.\n\nCloud-based systems also facilitate regulatory compliance by automatically tracking lot numbers, expiration dates, and serialization data required by laws like DSCSA. When recalls occur, these systems can instantly identify affected products and their current locations, enabling rapid response. Integration with blockchain technology is adding another layer of security and traceability to cloud-based inventory systems.",
+    author: "Dr. Sarah Johnson",
+    date: "March 3, 2024",
+    readTime: "6 min read",
+    category: "Technology",
+    image: "/src/assets/product-monitor.jpg",
+    featured: false,
+  },
+  {
+    id: 10,
+    title: "Robotics and Automation in Pharmaceutical Warehousing",
+    excerpt: "How robots and automated systems are improving efficiency, accuracy, and safety in pharmaceutical distribution centers.",
+    content: "Robotics and automation are transforming pharmaceutical warehousing, addressing labor shortages while improving accuracy, efficiency, and safety. From autonomous mobile robots to sophisticated picking systems, these technologies are becoming essential for competitive pharmaceutical distribution operations.\n\nAutonomous mobile robots (AMRs) navigate warehouse floors independently, transporting products between storage areas, picking stations, and shipping docks. Unlike traditional conveyor systems, AMRs offer flexibility to adapt to changing layouts and seasonal demand fluctuations. They work alongside human workers, handling repetitive transport tasks while freeing staff for higher-value activities requiring judgment and expertise.\n\nAutomated storage and retrieval systems (AS/RS) maximize warehouse space utilization while improving picking accuracy and speed. These systems use robotic cranes to store and retrieve products from high-density storage arrays, reducing the physical demands on workers and minimizing errors. For temperature-controlled products, automation also reduces the time warehouse doors are open, maintaining better environmental control.\n\nRobotic picking systems equipped with computer vision and artificial intelligence can identify, grasp, and pack pharmaceutical products with high accuracy. These systems are particularly valuable for processing large volumes of individual prescriptions, where traditional manual picking is time-consuming and error-prone. As the technology matures, robots are handling increasingly complex tasks including inspection, labeling, and quality control.",
+    author: "Lisa Rodriguez",
+    date: "February 27, 2024",
+    readTime: "7 min read",
+    category: "Technology",
+    image: "/src/assets/product-ultrasound.jpg",
+    featured: false,
+  },
+  {
+    id: 11,
+    title: "IoT Sensors for Cold Chain Monitoring and Compliance",
+    excerpt: "Implementing Internet of Things devices to ensure temperature-sensitive medications maintain proper conditions throughout distribution.",
+    content: "Internet of Things (IoT) sensors are revolutionizing cold chain management for temperature-sensitive pharmaceuticals, providing real-time monitoring, automated alerts, and comprehensive documentation for regulatory compliance. These technologies are essential for maintaining product integrity and patient safety.\n\nModern IoT sensors continuously monitor temperature, humidity, and location throughout the supply chain journey. Data is transmitted to cloud platforms in real-time, enabling immediate alerts when conditions deviate from acceptable ranges. This allows rapid intervention to protect product integrity, whether through rerouting shipments, adjusting refrigeration equipment, or quarantining potentially compromised products.\n\nThe pharmaceutical industry faces increasingly stringent regulations around cold chain management, with requirements for continuous temperature monitoring and detailed documentation. IoT systems automatically generate compliance reports, maintaining complete audit trails that satisfy regulatory requirements. This automation reduces administrative burden while providing stronger evidence of proper handling.\n\nPredictive analytics applied to IoT sensor data can identify potential cold chain failures before they occur. By analyzing patterns in temperature fluctuations, equipment performance, and environmental conditions, systems can predict when refrigeration units are likely to fail or when seasonal weather patterns may stress cold chain infrastructure. This enables proactive maintenance and contingency planning.",
+    author: "Dr. Michael Chen",
+    date: "February 25, 2024",
+    readTime: "8 min read",
+    category: "Technology",
+    image: "/src/assets/product-surgical-light.jpg",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "Blockchain for Pharmaceutical Track and Trace",
+    excerpt: "Using distributed ledger technology to create transparent, immutable records of pharmaceutical product movements and authentication.",
+    content: "Blockchain technology is emerging as a powerful solution for pharmaceutical supply chain transparency, enabling secure, immutable tracking of products from manufacturer to patient. This technology addresses critical challenges including counterfeit drugs, supply chain visibility, and regulatory compliance.\n\nBlockchain creates a distributed ledger where every transaction and product movement is recorded in a tamper-proof manner. Each participant in the supply chain—manufacturers, distributors, pharmacies, and healthcare providers—can view relevant transaction history while maintaining data privacy. This transparency helps combat counterfeit drugs by making it easy to verify product authenticity and identify suspicious activities.\n\nRegulatory requirements like the Drug Supply Chain Security Act (DSCSA) mandate detailed tracking and tracing of prescription medications. Blockchain provides an elegant solution, automatically capturing required data points and making them accessible to authorized parties. The technology simplifies compliance while providing stronger security than traditional databases vulnerable to hacking or manipulation.\n\nSmart contracts built on blockchain platforms can automate many supply chain processes, from purchase orders and invoicing to quality certifications and regulatory reporting. These self-executing agreements reduce administrative overhead, minimize errors, and accelerate transaction processing. Early adopters are seeing significant efficiency gains while building more resilient, transparent supply chains.",
+    author: "Dr. Sarah Johnson",
+    date: "February 23, 2024",
+    readTime: "7 min read",
+    category: "Technology",
+    image: "/src/assets/product-defibrillator.jpg",
+    featured: false,
+  },
+  {
+    id: 13,
+    title: "ISO 13485 Certification: Requirements and Benefits",
+    excerpt: "Understanding the international standard for medical device quality management systems and the certification process.",
+    content: "ISO 13485 certification represents the gold standard for medical device quality management systems, providing a comprehensive framework for ensuring consistent quality, regulatory compliance, and patient safety. This internationally recognized standard is essential for medical device manufacturers and distributors seeking global market access.\n\nThe standard establishes requirements for a quality management system that addresses the full lifecycle of medical devices, from design and development through production, distribution, and post-market surveillance. Key elements include risk management, design controls, supplier management, and complaint handling. Organizations must demonstrate effective implementation of these requirements through detailed documentation and regular internal audits.\n\nCertification benefits extend beyond regulatory compliance to include operational improvements and market advantages. The discipline required to achieve and maintain certification typically leads to more efficient processes, fewer quality issues, and stronger customer relationships. Many hospitals and healthcare systems now require ISO 13485 certification from their medical device suppliers, making it a prerequisite for market access.\n\nThe certification process involves selecting an accredited registrar, conducting a gap analysis, implementing necessary improvements, and undergoing a comprehensive audit. Initial certification typically takes 6-12 months, followed by regular surveillance audits to maintain certification. Organizations should view this as an ongoing commitment to quality rather than a one-time achievement.",
+    author: "Lisa Rodriguez",
+    date: "March 2, 2024",
+    readTime: "6 min read",
     category: "Quality Control",
     image: "/src/assets/product-atomizer.jpg",
     featured: false,
   },
   {
-    id: 4,
-    title: "Digital Transformation in Healthcare Supply Chains",
-    excerpt: "How artificial intelligence and machine learning are optimizing inventory management and reducing waste.",
-    content: "Digital transformation is revolutionizing healthcare supply chains, with artificial intelligence and machine learning leading the charge in creating smarter, more efficient systems. These technologies are tackling longstanding challenges in inventory management, demand forecasting, and waste reduction.\n\nAI-powered demand forecasting systems analyze vast amounts of historical data, seasonal patterns, and external factors to predict future needs with unprecedented accuracy. This helps healthcare facilities maintain optimal inventory levels—reducing both stockouts and excess inventory that leads to waste from expired medications. Some advanced systems can even factor in weather patterns, disease outbreaks, and population health trends to anticipate demand spikes.\n\nMachine learning algorithms are also transforming warehouse operations and logistics. Automated systems can optimize storage locations based on product velocity and compatibility, while intelligent routing algorithms ensure efficient delivery schedules. These technologies not only reduce operational costs but also improve product availability and reduce the environmental impact of healthcare supply chains.\n\nBlockchain technology is emerging as a powerful tool for enhancing transparency and security in pharmaceutical supply chains. By creating immutable records of every transaction and movement, blockchain helps combat counterfeit drugs, ensures regulatory compliance, and builds trust among all stakeholders. Early adopters are seeing benefits in streamlined recalls, improved inventory accuracy, and enhanced collaboration across complex supply networks.",
-    author: "Dr. Sarah Johnson",
-    date: "March 5, 2024",
+    id: 14,
+    title: "Statistical Process Control in Pharmaceutical Manufacturing",
+    excerpt: "Implementing data-driven methods to monitor and control manufacturing processes for consistent product quality.",
+    content: "Statistical process control (SPC) has become essential for pharmaceutical manufacturing, providing objective, data-driven methods for monitoring process performance and detecting variations before they result in quality issues. This proactive approach minimizes defects while supporting continuous improvement and regulatory compliance.\n\nSPC uses statistical methods to analyze process data and distinguish between normal variation and special causes requiring intervention. Control charts track key process parameters over time, providing visual indicators when processes drift outside acceptable ranges. This enables rapid response to prevent production of out-of-specification products and reduces waste from quality failures.\n\nModern SPC systems integrate with manufacturing equipment and laboratory instruments to collect data automatically, eliminating transcription errors and enabling real-time process monitoring. Advanced analytics can identify subtle trends and patterns that human observers might miss, providing early warning of potential quality issues. Some systems use machine learning to continuously refine control limits based on process performance.\n\nRegulatory agencies increasingly expect pharmaceutical manufacturers to implement process analytical technology (PAT) and quality by design (QbD) principles, both of which rely heavily on SPC methods. These approaches shift focus from end-product testing to process understanding and control, resulting in more consistent quality and reduced regulatory risk.",
+    author: "Dr. Michael Chen",
+    date: "February 26, 2024",
     readTime: "7 min read",
-    category: "Technology",
+    category: "Quality Control",
+    image: "/src/assets/product-monitor.jpg",
+    featured: false,
+  },
+  {
+    id: 15,
+    title: "Validation Protocols for Pharmaceutical Equipment",
+    excerpt: "Best practices for qualifying and validating manufacturing equipment to ensure consistent performance and compliance.",
+    content: "Equipment validation is a cornerstone of pharmaceutical quality assurance, ensuring that manufacturing equipment consistently operates within specified parameters and produces products meeting quality standards. Proper validation protocols protect product quality, support regulatory compliance, and provide confidence in manufacturing processes.\n\nThe validation lifecycle includes design qualification (DQ), installation qualification (IQ), operational qualification (OQ), and performance qualification (PQ). Each phase builds upon the previous one, systematically verifying that equipment is properly designed, installed, operating correctly, and consistently producing acceptable results. Comprehensive documentation is essential, providing evidence that validation activities were properly conducted.\n\nProcess equipment validation must consider the full range of operating conditions, including worst-case scenarios that challenge equipment capabilities. Testing should verify that equipment performs consistently across its operating range, can be effectively cleaned to prevent cross-contamination, and includes adequate controls and alarms to protect product quality. Validation protocols should be risk-based, focusing resources on aspects most critical to product quality and patient safety.\n\nRevalidation is required after equipment modifications, following deviations, and periodically even without changes. Many organizations implement ongoing verification programs that continuously monitor equipment performance, reducing the need for time-consuming revalidation projects. This approach aligns with modern quality paradigms emphasizing continuous verification over periodic validation campaigns.",
+    author: "Dr. Sarah Johnson",
+    date: "February 24, 2024",
+    readTime: "8 min read",
+    category: "Quality Control",
+    image: "/src/assets/product-ultrasound.jpg",
+    featured: false,
+  },
+  {
+    id: 16,
+    title: "Root Cause Analysis and CAPA in Pharmaceutical Quality",
+    excerpt: "Systematic approaches to investigating quality issues and implementing corrective and preventive actions.",
+    content: "Effective root cause analysis (RCA) and corrective and preventive action (CAPA) systems are essential for pharmaceutical quality management, turning quality issues into opportunities for improvement while preventing recurrence. These systematic approaches demonstrate a commitment to continuous improvement and are closely scrutinized during regulatory inspections.\n\nRoot cause analysis requires disciplined investigation that looks beyond obvious symptoms to identify underlying causes. Tools like the 5 Whys, fishbone diagrams, and fault tree analysis help investigators systematically explore potential causes. The goal is to identify system-level issues rather than blaming individuals, leading to more effective and sustainable solutions.\n\nCorrective actions address the immediate problem and prevent recurrence, while preventive actions identify and address potential issues before they occur. Effective CAPA systems prioritize actions based on risk, assign clear responsibilities, and include verification steps to ensure effectiveness. Regular review of CAPA metrics helps identify systemic issues requiring management attention.\n\nModern CAPA systems increasingly leverage data analytics to identify trends and patterns across multiple events. This proactive approach can reveal systemic issues that might be missed when investigating individual incidents in isolation. Integration with other quality systems including deviations, complaints, and change control creates a comprehensive view of product and process performance.",
+    author: "Lisa Rodriguez",
+    date: "February 22, 2024",
+    readTime: "6 min read",
+    category: "Quality Control",
+    image: "/src/assets/product-surgical-light.jpg",
+    featured: false,
+  },
+  {
+    id: 17,
+    title: "FDA Inspection Readiness for Pharmaceutical Facilities",
+    excerpt: "Preparing for FDA inspections through documentation, training, and quality system maintenance.",
+    content: "FDA inspections are high-stakes events that can significantly impact a pharmaceutical company's operations and reputation. Effective preparation requires ongoing attention to quality systems, documentation practices, and staff training rather than last-minute scrambling when inspection notices arrive.\n\nInspection readiness begins with maintaining robust quality systems that comply with current Good Manufacturing Practice (cGMP) regulations. This includes documented procedures, training records, equipment qualification, process validation, and comprehensive quality oversight. Regular internal audits using FDA inspection techniques help identify gaps before regulators do, allowing time for remediation.\n\nDocumentation practices deserve special attention, as inspectors will thoroughly review records looking for evidence of compliance. Records should be complete, accurate, contemporaneous, and clearly demonstrate that procedures were followed. Electronic systems must comply with 21 CFR Part 11 requirements for security, audit trails, and controls. Common citation areas include incomplete batch records, inadequate investigations, and deficient cleaning validation.\n\nMock inspections provide valuable experience and build confidence for when actual inspections occur. These exercises should simulate realistic inspection scenarios, including challenging questions and requests for documentation. Debriefing sessions identify areas needing improvement and help establish consistent messaging among staff. Management commitment to quality, demonstrated through resource allocation and response to quality issues, is ultimately what inspectors want to see.",
+    author: "Dr. Michael Chen",
+    date: "February 20, 2024",
+    readTime: "9 min read",
+    category: "Compliance",
+    image: "/src/assets/product-defibrillator.jpg",
+    featured: false,
+  },
+  {
+    id: 18,
+    title: "European MDR Compliance for Medical Device Companies",
+    excerpt: "Navigating the Medical Device Regulation requirements for manufacturers and distributors in European markets.",
+    content: "The European Medical Device Regulation (MDR) represents the most significant change to medical device regulation in Europe in decades, establishing more stringent requirements for clinical evidence, post-market surveillance, and quality management. Companies serving European markets must understand and comply with these requirements to maintain market access.\n\nMDR requires more extensive clinical evidence to demonstrate safety and effectiveness, including clinical evaluation reports that synthesize available clinical data and identify any gaps requiring additional studies. For many devices, this means conducting new clinical investigations or post-market clinical follow-up studies. The regulation also requires more detailed technical documentation and regular updates to maintain compliance.\n\nPost-market surveillance has been significantly strengthened under MDR, with requirements for comprehensive plans, periodic safety update reports, and post-market clinical follow-up for certain device classes. Companies must establish systems for collecting and analyzing data on device performance, investigating complaints, and reporting adverse events. This information feeds into ongoing risk management and quality improvement activities.\n\nThe unique device identification (UDI) system under MDR creates transparency and traceability throughout the device lifecycle. Manufacturers must assign UDIs to their devices and register them in the European Database on Medical Devices (EUDAMED). Distributors and healthcare facilities should implement systems to capture and utilize UDI data for inventory management, recalls, and patient safety initiatives.",
+    author: "Dr. Sarah Johnson",
+    date: "February 18, 2024",
+    readTime: "8 min read",
+    category: "Compliance",
+    image: "/src/assets/product-monitor.jpg",
+    featured: false,
+  },
+  {
+    id: 19,
+    title: "DSCSA Compliance: Track and Trace Implementation",
+    excerpt: "Meeting Drug Supply Chain Security Act requirements for serialization and product tracing in the U.S. pharmaceutical supply chain.",
+    content: "The Drug Supply Chain Security Act (DSCSA) is fundamentally changing how pharmaceutical products are tracked through the U.S. supply chain, requiring serialization at the package level and electronic tracing of product movements. Full implementation requires significant technology investments and process changes across the entire supply chain.\n\nSerialization assigns unique identifiers to individual product packages, enabling tracking of each package throughout its journey from manufacturer to dispenser. Companies must implement systems to generate, apply, and verify these serial numbers while maintaining associated transaction data. The technology infrastructure required includes serialization equipment, data management systems, and interfaces with trading partners.\n\nThe Act mandates specific transaction information, transaction history, and transaction statements that must accompany product movements between trading partners. As of November 2023, these exchanges must occur electronically in standardized formats, requiring sophisticated systems capable of generating, receiving, and storing large volumes of structured data. Integration with existing enterprise resource planning and warehouse management systems is essential.\n\nVerification requirements enable dispensers to confirm product authenticity by checking serial numbers against manufacturer data. This capability is critical for identifying suspect or illegitimate products before they reach patients. Systems must support high-volume verification with minimal impact on dispensing workflows, requiring thoughtful integration with pharmacy management systems and processes.",
+    author: "Lisa Rodriguez",
+    date: "February 16, 2024",
+    readTime: "7 min read",
+    category: "Compliance",
+    image: "/src/assets/product-ultrasound.jpg",
+    featured: false,
+  },
+  {
+    id: 20,
+    title: "Global Harmonization of Pharmaceutical Regulations",
+    excerpt: "Understanding international efforts to align pharmaceutical regulations and their impact on global distribution.",
+    content: "Regulatory harmonization initiatives aim to align pharmaceutical requirements across different jurisdictions, reducing duplication and facilitating global access to medicines. While significant progress has been made, navigating the complex landscape of international pharmaceutical regulations remains challenging for companies operating across multiple markets.\n\nThe International Council for Harmonisation (ICH) has successfully aligned many technical requirements for pharmaceutical development, manufacturing, and quality control. ICH guidelines on topics like stability testing, analytical methods, and quality risk management are now widely adopted, reducing the need for region-specific studies and documentation. This harmonization accelerates development timelines and reduces costs for companies pursuing global registrations.\n\nDespite harmonization efforts, significant regional differences remain, particularly in areas like clinical trial requirements, labeling, and post-market surveillance. Companies must maintain expertise in regional regulations and often adapt products and documentation to meet local requirements. Strategic planning should consider these differences early in development to avoid costly delays in key markets.\n\nThe trend toward regulatory convergence is likely to continue, driven by patient advocacy for faster access to new medicines and industry desire for more efficient development processes. Emerging markets are increasingly adopting standards from established agencies like FDA and EMA, potentially simplifying future global registration strategies. However, local requirements will likely persist in areas related to cultural preferences, disease prevalence, and healthcare system characteristics.",
+    author: "Dr. Michael Chen",
+    date: "February 14, 2024",
+    readTime: "6 min read",
+    category: "Compliance",
+    image: "/src/assets/product-surgical-light.jpg",
+    featured: false,
+  },
+  {
+    id: 21,
+    title: "Reducing Pharmaceutical Packaging Waste",
+    excerpt: "Innovative strategies for minimizing packaging materials while maintaining product integrity and regulatory compliance.",
+    content: "Pharmaceutical packaging waste represents a significant environmental challenge, with the industry's commitment to product safety and regulatory compliance traditionally prioritizing protection over sustainability. However, innovative companies are demonstrating that packaging can be both environmentally responsible and compliant with stringent pharmaceutical requirements.\n\nRight-sizing packaging represents an immediate opportunity to reduce waste without compromising protection. Many pharmaceutical packages contain excessive void space, requiring additional cushioning materials. Advanced packaging design tools can optimize box dimensions to minimize material use while maintaining proper protection. Some companies have reduced packaging weight by 30% or more through systematic right-sizing initiatives.\n\nMaterial innovation is creating more sustainable packaging options. Biodegradable cushioning materials can replace traditional plastics, while recycled content is being incorporated into cartons and labels where quality standards permit. Water-soluble films and plant-based plastics offer alternatives to petroleum-based materials. However, any material changes must be carefully validated to ensure they don't affect product stability or sterility.\n\nReusable packaging systems offer the greatest waste reduction potential but require careful consideration of pharmaceutical requirements. Reusable containers must be designed for effective cleaning and verification, with clear protocols for tracking, maintenance, and retirement. Pilot programs in closed-loop distribution systems have demonstrated feasibility while identifying best practices for broader adoption.",
+    author: "Lisa Rodriguez",
+    date: "February 21, 2024",
+    readTime: "7 min read",
+    category: "Sustainability",
+    image: "/src/assets/product-atomizer.jpg",
+    featured: false,
+  },
+  {
+    id: 22,
+    title: "Carbon Neutral Pharmaceutical Distribution Networks",
+    excerpt: "Strategies for reducing carbon emissions in pharmaceutical logistics and achieving net-zero distribution operations.",
+    content: "Pharmaceutical distributors are increasingly committing to carbon neutrality, recognizing both the environmental imperative and growing customer expectations for sustainable operations. Achieving net-zero distribution requires comprehensive strategies addressing transportation, facilities, and packaging across complex logistics networks.\n\nTransportation represents the largest source of carbon emissions for most pharmaceutical distributors. Strategies for reduction include optimizing delivery routes using advanced algorithms, increasing vehicle load factors to reduce empty miles, and transitioning to lower-emission vehicles including electric and hydrogen-powered trucks. Some companies are also exploring rail and waterway transportation for appropriate shipments, trading some speed for dramatically lower emissions.\n\nFacility operations offer significant opportunities for emission reductions. Distribution centers are implementing LED lighting, advanced HVAC systems, solar panels, and battery storage to reduce energy consumption and transition to renewable sources. Green building certifications like LEED provide frameworks for systematic improvements. Temperature-controlled storage, essential for many pharmaceuticals, requires special attention given its high energy demands.\n\nCarbon offset programs can address residual emissions that are difficult or impossible to eliminate with current technology. However, offsets should complement rather than replace direct emission reductions. The most credible programs support verified projects with measurable climate benefits, such as reforestation, renewable energy development, or methane capture. Transparent reporting of both emissions and offset activities builds stakeholder trust.",
+    author: "Dr. Sarah Johnson",
+    date: "February 19, 2024",
+    readTime: "8 min read",
+    category: "Sustainability",
+    image: "/src/assets/product-sanitizer.jpg",
+    featured: false,
+  },
+  {
+    id: 23,
+    title: "Pharmaceutical Water Conservation and Recycling",
+    excerpt: "Implementing water management programs to reduce consumption and enable water recycling in pharmaceutical manufacturing.",
+    content: "Water is essential for pharmaceutical manufacturing, used in product formulation, equipment cleaning, HVAC systems, and numerous other applications. Growing water scarcity in many regions is driving companies to implement comprehensive water management programs that reduce consumption while exploring opportunities for recycling and reuse.\n\nWater use mapping provides baseline understanding of consumption across different processes and identifies high-value reduction opportunities. Detailed sub-metering reveals usage patterns and highlights inefficiencies. Many facilities discover that relatively simple changes like fixing leaks, optimizing cooling tower cycles, and upgrading to water-efficient equipment can yield significant savings with minimal investment.\n\nWater recycling and reuse requires careful consideration of pharmaceutical quality requirements and regulatory expectations. While pharmaceutical-grade water production generates significant wastewater that could potentially be recovered for non-product uses, rigorous controls are needed to prevent any risk of cross-contamination. Successful programs typically focus on closed-loop cooling systems, condensate recovery, and rainwater harvesting for non-pharmaceutical applications like landscaping and restrooms.\n\nAdvanced treatment technologies are expanding opportunities for water reuse in pharmaceutical facilities. Membrane filtration, reverse osmosis, and UV disinfection can produce high-quality reclaimed water suitable for various applications. However, implementing these systems requires thorough validation, ongoing monitoring, and clear segregation from pharmaceutical-grade water systems to maintain regulatory compliance and product quality.",
+    author: "Dr. Michael Chen",
+    date: "February 17, 2024",
+    readTime: "6 min read",
+    category: "Sustainability",
     image: "/src/assets/product-sprayer.jpg",
     featured: false,
   },
   {
-    id: 5,
-    title: "Regulatory Compliance in Pharmaceutical Distribution",
-    excerpt: "Understanding FDA regulations and international standards for pharmaceutical distributors and manufacturers.",
-    content: "Navigating the complex landscape of pharmaceutical regulations requires constant vigilance and a deep understanding of evolving requirements. From FDA regulations in the United States to the Falsified Medicines Directive in Europe, pharmaceutical distributors must comply with multiple overlapping regulatory frameworks while maintaining operational efficiency.\n\nThe Drug Supply Chain Security Act (DSCSA) represents a major shift toward enhanced traceability in the U.S. pharmaceutical supply chain. Full implementation of serialization and track-and-trace requirements is creating unprecedented visibility into product movement while helping combat counterfeit drugs. Distributors must invest in technology systems capable of capturing, storing, and exchanging serialization data at scale.\n\nGood Distribution Practice (GDP) guidelines provide a framework for ensuring product integrity throughout the distribution process. These standards cover everything from facility requirements and equipment qualification to personnel training and transportation management. Compliance requires robust quality management systems, regular audits, and continuous improvement programs.\n\nInternational distribution adds additional layers of complexity, as companies must navigate varying regulatory requirements across different jurisdictions. Successful global distributors maintain dedicated regulatory affairs teams, implement harmonized quality systems that meet the strictest standards, and stay engaged with regulatory authorities through trade associations and industry forums. The investment in compliance infrastructure pays dividends in market access, operational reliability, and patient safety.",
-    author: "Dr. Michael Chen",
-    date: "March 1, 2024",
-    readTime: "9 min read",
-    category: "Compliance",
-    image: "/src/assets/hero-medical.jpg",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Sustainable Practices in Medical Supply Manufacturing",
-    excerpt: "How the pharmaceutical industry is adopting eco-friendly practices while maintaining product quality and safety.",
-    content: "Sustainability has become a critical priority for the pharmaceutical and medical device industries, as companies recognize both the environmental imperative and the business case for eco-friendly practices. The challenge lies in implementing sustainable practices without compromising the stringent quality and safety standards required for medical products.\n\nGreen manufacturing initiatives are focusing on energy efficiency, waste reduction, and sustainable sourcing. Many manufacturers are investing in renewable energy, implementing closed-loop water systems, and optimizing production processes to minimize resource consumption. These efforts not only reduce environmental impact but often lead to significant cost savings over time.\n\nPackaging represents a major opportunity for sustainability improvements. The medical industry has traditionally relied heavily on single-use plastics to ensure sterility and product integrity. Innovative companies are now developing biodegradable alternatives, optimizing package sizes to reduce material use, and designing packaging that's easier to recycle. Some are exploring reusable packaging systems for certain product categories, carefully balancing sustainability goals with patient safety requirements.\n\nSupply chain sustainability extends beyond manufacturing to include transportation, warehousing, and distribution. Companies are optimizing logistics networks to reduce carbon emissions, partnering with carriers committed to sustainable practices, and implementing green building standards for distribution centers. The most forward-thinking organizations are conducting full lifecycle assessments of their products, from raw material extraction through end-of-life disposal, to identify opportunities for reducing environmental impact throughout the value chain.",
+    id: 24,
+    title: "Sustainable Sourcing in Pharmaceutical Supply Chains",
+    excerpt: "Evaluating and improving the environmental and social impact of raw material sourcing for pharmaceutical products.",
+    content: "Sustainable sourcing extends sustainability efforts beyond a company's direct operations to encompass the full supply chain, addressing environmental and social impacts of raw material production, supplier operations, and logistics. For pharmaceutical companies, this means evaluating thousands of suppliers and materials against sustainability criteria while maintaining quality and compliance standards.\n\nSupplier sustainability assessments evaluate environmental practices, labor conditions, business ethics, and governance. Leading pharmaceutical companies use standardized questionnaires, third-party audits, and sustainability ratings to screen suppliers. High-risk suppliers may require corrective action plans or face disqualification from approved supplier lists. However, these assessments must be balanced against pharmaceutical's unique requirements for supplier qualification and the limited supplier base for many specialized materials.\n\nRaw material selection offers opportunities to reduce environmental impact at the source. Bio-based alternatives to petroleum-derived materials, sustainably harvested plant materials, and recycled content can reduce carbon footprint when they meet pharmaceutical quality requirements. Life cycle assessments help quantify the environmental benefits of alternative materials, supporting informed decision-making that balances sustainability with cost, quality, and supply reliability.\n\nCollaboration throughout the supply chain is essential for driving meaningful progress. Industry consortiums and multi-stakeholder initiatives enable companies to share best practices, establish common sustainability standards, and collectively engage suppliers on improvement priorities. This collaborative approach can achieve greater impact than individual company efforts, particularly with suppliers serving multiple pharmaceutical companies.",
     author: "Lisa Rodriguez",
-    date: "February 28, 2024",
-    readTime: "6 min read",
+    date: "February 15, 2024",
+    readTime: "7 min read",
     category: "Sustainability",
-    image: "/src/assets/product-sanitizer.jpg",
+    image: "/src/assets/hero-medical.jpg",
     featured: false,
   },
 ];
@@ -87,6 +303,8 @@ const categories = ["All", "Industry Insights", "Healthcare", "Technology", "Qua
 
 const Blog = () => {
   const [selectedBlog, setSelectedBlog] = useState<typeof blogPosts[0] | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [visiblePosts, setVisiblePosts] = useState(6);
 
   return (
     <div className="min-h-screen bg-background">
@@ -177,8 +395,12 @@ const Blog = () => {
             {categories.map((category) => (
               <Button
                 key={category}
-                variant={category === "All" ? "default" : "outline"}
-                className={category === "All" ? "bg-gradient-primary hover:opacity-90" : ""}
+                variant={activeCategory === category ? "default" : "outline"}
+                className={activeCategory === category ? "bg-gradient-primary hover:opacity-90" : ""}
+                onClick={() => {
+                  setActiveCategory(category);
+                  setVisiblePosts(6);
+                }}
               >
                 {category}
               </Button>
@@ -193,7 +415,10 @@ const Blog = () => {
           <h2 className="text-4xl font-bold text-foreground mb-12 text-center">Latest Articles</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.filter(post => !post.featured).map(post => (
+            {blogPosts
+              .filter(post => !post.featured && (activeCategory === "All" || post.category === activeCategory))
+              .slice(0, visiblePosts)
+              .map(post => (
               <Card key={post.id} className="shadow-card hover:shadow-hover transition-all duration-300 border-0 overflow-hidden group">
                 <div className="relative h-48 overflow-hidden">
                   <img 
@@ -240,11 +465,18 @@ const Blog = () => {
           </div>
 
           {/* Load More */}
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="px-8">
-              Load More Articles
-            </Button>
-          </div>
+          {blogPosts.filter(post => !post.featured && (activeCategory === "All" || post.category === activeCategory)).length > visiblePosts && (
+            <div className="text-center mt-12">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="px-8"
+                onClick={() => setVisiblePosts(prev => prev + 6)}
+              >
+                Load More Articles
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
