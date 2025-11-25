@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyProfile from "./pages/MyProfile";
+import Checkout from "./pages/Checkout";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/my-profile" element={<MyProfile />} />
+                <Route path="/checkout" element={<Checkout />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 {/* Admin Routes */}

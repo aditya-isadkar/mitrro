@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,7 +8,13 @@ import CartItemComponent from "./CartItem";
 import { Separator } from "@/components/ui/separator";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { items, totalItems, totalPrice, isOpen, openCart, closeCart, clearCart } = useCart();
+
+  const handleCheckout = () => {
+    closeCart();
+    navigate("/checkout");
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => open ? openCart() : closeCart()}>
@@ -61,6 +68,7 @@ const Cart = () => {
                   <Button 
                     className="w-full bg-gradient-primary hover:opacity-90"
                     size="lg"
+                    onClick={handleCheckout}
                   >
                     Proceed to Checkout
                   </Button>
