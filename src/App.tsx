@@ -24,6 +24,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRegister from "./pages/admin/AdminRegister";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import ProductDetail from "./pages/ProductDetail";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,8 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/categories" element={<Categories />} />
-                <Route path="/products" element={<Products />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/brands" element={<Brands />} />
                 <Route path="/sale-on-mitrro" element={<SaleOnMitrro />} />
                 <Route path="/about-us" element={<AboutUs />} />

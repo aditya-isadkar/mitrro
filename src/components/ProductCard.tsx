@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Eye, Heart } from "lucide-react";
 import AddToCartButton from "@/components/AddToCartButton";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: string;
@@ -14,11 +15,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, name, price, originalPrice, image, category }: ProductCardProps) => {
+  const navigate = useNavigate();
   const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
 
   return (
     <Card className="group overflow-hidden bg-gradient-card border-0 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden cursor-pointer" onClick={() => navigate(`/products/${id}`)}>
         <img
           src={image}
           alt={name}
@@ -37,10 +39,23 @@ const ProductCard = ({ id, name, price, originalPrice, image, category }: Produc
         
         {/* Overlay Actions */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-          <Button size="icon" variant="secondary" className="rounded-full">
+          <Button 
+            size="icon" 
+            variant="secondary" 
+            className="rounded-full"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/products/${id}`);
+            }}
+          >
             <Eye className="h-4 w-4" />
           </Button>
-          <Button size="icon" variant="secondary" className="rounded-full">
+          <Button 
+            size="icon" 
+            variant="secondary" 
+            className="rounded-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Heart className="h-4 w-4" />
           </Button>
         </div>
