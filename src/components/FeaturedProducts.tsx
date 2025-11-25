@@ -2,45 +2,36 @@ import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import monitorImage from "@/assets/product-monitor.jpg";
-import ultrasoundImage from "@/assets/product-ultrasound.jpg";
-import defibrillatorImage from "@/assets/product-defibrillator.jpg";
-import surgicalLightImage from "@/assets/product-surgical-light.jpg";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image_url: string;
+  description?: string;
+}
 
 const FeaturedProducts = () => {
-  const products = [
-    {
-      id: "1",
-      name: "Advanced Patient Monitor System",
-      price: 45000,
-      originalPrice: 52000,
-      image: monitorImage,
-      category: "Monitoring Equipment"
-    },
-    {
-      id: "2",
-      name: "Digital Ultrasound Machine",
-      price: 85000,
-      originalPrice: 95000,
-      image: ultrasoundImage,
-      category: "Diagnostic Imaging"
-    },
-    {
-      id: "3",
-      name: "Smart Defibrillator AED",
-      price: 32000,
-      image: defibrillatorImage,
-      category: "Emergency Equipment"
-    },
-    {
-      id: "4",
-      name: "LED Surgical Light System",
-      price: 28000,
-      originalPrice: 35000,
-      image: surgicalLightImage,
-      category: "Surgical Equipment"
-    }
-  ];
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .limit(4);
+      
+      if (!error && data) {
+        setProducts(data);
+      }
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <section className="py-20 bg-muted/30">
@@ -61,17 +52,29 @@ const FeaturedProducts = () => {
 
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {products.map((product, index) => (
-            <div
-              key={product.id}
-              className="animate-slide-up"
-              style={{
-                animationDelay: `${index * 0.1}s`
-              }}
-            >
-              <ProductCard {...product} />
-            </div>
-          ))}
+          {loading ? (
+            <p className="col-span-full text-center text-muted-foreground">Loading products...</p>
+          ) : products.length === 0 ? (
+            <p className="col-span-full text-center text-muted-foreground">No products available yet.</p>
+          ) : (
+            products.map((product, index) => (
+              <div
+                key={product.id}
+                className="animate-slide-up"
+                style={{
+                  animationDelay: `${index * 0.1}s`
+                }}
+              >
+                <ProductCard 
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image_url}
+                  category={product.description || ""}
+                />
+              </div>
+            ))
+          )}
         </div>
 
         {/* View All Button */}

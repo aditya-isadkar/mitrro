@@ -3,470 +3,47 @@ import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, SlidersHorizontal } from "lucide-react";
-import n95MaskImg from "@/assets/product-n95-mask.jpg";
-import covidTestImg from "@/assets/product-covid-test.jpg";
-import sanitizerImg from "@/assets/product-hand-sanitizer.jpg";
-import ppeSuitImg from "@/assets/product-ppe-suit.jpg";
-import syringesImg from "@/assets/product-syringes.jpg";
-import glovesImg from "@/assets/product-gloves.jpg";
-import monitorImg from "@/assets/product-monitor.jpg";
-import ventilatorImg from "@/assets/product-ventilator.jpg";
-import xrayImg from "@/assets/product-xray.jpg";
-import ultrasoundImg from "@/assets/product-ultrasound.jpg";
-import defibrillatorImg from "@/assets/product-defibrillator.jpg";
-import dentalChairImg from "@/assets/product-dental-chair.jpg";
-import dentalHandpieceImg from "@/assets/product-dental-handpiece.jpg";
-import dentalXrayImg from "@/assets/product-dental-xray.jpg";
-import orthodonticsImg from "@/assets/product-orthodontics.jpg";
-import implantsImg from "@/assets/product-implants.jpg";
-import scalpelImg from "@/assets/product-scalpel.jpg";
-import forcepsImg from "@/assets/product-forceps.jpg";
-import scissorsImg from "@/assets/product-scissors.jpg";
-import hospitalBedImg from "@/assets/product-hospital-bed.jpg";
-import operatingTableImg from "@/assets/product-operating-table.jpg";
-import surgicalLightImg from "@/assets/product-surgical-light.jpg";
-import storageImg from "@/assets/product-storage.jpg";
-import gauzeImg from "@/assets/product-gauze.jpg";
-import drapesImg from "@/assets/product-drapes.jpg";
-import furnitureImg from "@/assets/product-furniture.jpg";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image_url: string;
+  description?: string;
+}
 
 const Products = () => {
   const [searchParams] = useSearchParams();
   const categoryName = searchParams.get("category") || "";
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Category data with subcategories
-  const categoryData: Record<string, string[]> = {
-    "Covid-19 Essentials": ["All", "Vaccines", "Test Kits", "N95 Masks", "Sanitizers", "PPE"],
-    "Consumable & Disposable": ["All", "Syringes", "Gloves", "Gauze", "Bandages", "Surgical Drapes"],
-    "Medical Device & Equipment": ["All", "Monitors", "Ventilators", "X-Ray Machines", "Ultrasound", "Defibrillators"],
-    "Dental": ["All", "Dental Chairs", "Hand Pieces", "Dental X-Ray", "Orthodontics", "Implants"],
-    "Surgical Instruments": ["All", "Scalpels", "Forceps", "Scissors", "Retractors", "Clamps"],
-    "Hospital Establishment": ["All", "Hospital Beds", "Operating Tables", "Medical Furniture", "Lighting", "Storage"]
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('products')
+        .select('*');
+      
+      if (!error && data) {
+        setProducts(data);
+      }
+      setLoading(false);
+    };
 
-  // Sample products for Covid-19 Essentials
-  const covidProducts = [
-    {
-      id: "1",
-      name: "N95 Respirator Mask (Pack of 20)",
-      price: 599,
-      originalPrice: 799,
-      image: n95MaskImg,
-      category: "N95 Masks"
-    },
-    {
-      id: "2",
-      name: "COVID-19 RT-PCR Test Kit",
-      price: 350,
-      image: covidTestImg,
-      category: "Test Kits"
-    },
-    {
-      id: "3",
-      name: "Hand Sanitizer 500ml (Pack of 5)",
-      price: 450,
-      originalPrice: 550,
-      image: sanitizerImg,
-      category: "Sanitizers"
-    },
-    {
-      id: "4",
-      name: "PPE Full Body Suit",
-      price: 1200,
-      image: ppeSuitImg,
-      category: "PPE"
-    },
-    {
-      id: "5",
-      name: "COVID-19 Rapid Antigen Test",
-      price: 150,
-      image: covidTestImg,
-      category: "Test Kits"
-    },
-    {
-      id: "6",
-      name: "Surgical Face Mask (Pack of 50)",
-      price: 250,
-      originalPrice: 350,
-      image: n95MaskImg,
-      category: "N95 Masks"
-    },
-    {
-      id: "7",
-      name: "Disposable Gloves (Pack of 100)",
-      price: 400,
-      image: glovesImg,
-      category: "PPE"
-    },
-    {
-      id: "8",
-      name: "Alcohol-Based Hand Rub 1L",
-      price: 280,
-      image: sanitizerImg,
-      category: "Sanitizers"
-    }
-  ];
-
-  // Consumable & Disposable products
-  const consumableProducts = [
-    {
-      id: "9",
-      name: "Sterile Syringes 10ml (Pack of 100)",
-      price: 850,
-      originalPrice: 1000,
-      image: syringesImg,
-      category: "Syringes"
-    },
-    {
-      id: "10",
-      name: "Nitrile Examination Gloves (Box of 200)",
-      price: 1200,
-      image: glovesImg,
-      category: "Gloves"
-    },
-    {
-      id: "11",
-      name: "Sterile Gauze Pads 4x4 (Pack of 200)",
-      price: 450,
-      image: gauzeImg,
-      category: "Gauze"
-    },
-    {
-      id: "12",
-      name: "Adhesive Bandages Assorted (Box of 100)",
-      price: 180,
-      originalPrice: 250,
-      image: gauzeImg,
-      category: "Bandages"
-    },
-    {
-      id: "13",
-      name: "Surgical Drapes Sterile (Pack of 50)",
-      price: 2500,
-      image: drapesImg,
-      category: "Surgical Drapes"
-    },
-    {
-      id: "14",
-      name: "Insulin Syringes 1ml (Pack of 100)",
-      price: 650,
-      image: syringesImg,
-      category: "Syringes"
-    },
-    {
-      id: "15",
-      name: "Elastic Bandage Roll 6 inch",
-      price: 120,
-      originalPrice: 180,
-      image: gauzeImg,
-      category: "Bandages"
-    },
-    {
-      id: "16",
-      name: "Latex Surgical Gloves (Pack of 50)",
-      price: 950,
-      image: glovesImg,
-      category: "Gloves"
-    }
-  ];
-
-  // Medical Device & Equipment products
-  const medicalDeviceProducts = [
-    {
-      id: "17",
-      name: "Patient Vital Signs Monitor",
-      price: 45000,
-      originalPrice: 52000,
-      image: monitorImg,
-      category: "Monitors"
-    },
-    {
-      id: "18",
-      name: "ICU Ventilator Machine",
-      price: 350000,
-      image: ventilatorImg,
-      category: "Ventilators"
-    },
-    {
-      id: "19",
-      name: "Digital X-Ray Machine",
-      price: 850000,
-      image: xrayImg,
-      category: "X-Ray Machines"
-    },
-    {
-      id: "20",
-      name: "Portable Ultrasound Scanner",
-      price: 120000,
-      originalPrice: 145000,
-      image: ultrasoundImg,
-      category: "Ultrasound"
-    },
-    {
-      id: "21",
-      name: "Automated External Defibrillator",
-      price: 85000,
-      image: defibrillatorImg,
-      category: "Defibrillators"
-    },
-    {
-      id: "22",
-      name: "ECG Machine 12 Channel",
-      price: 65000,
-      originalPrice: 75000,
-      image: monitorImg,
-      category: "Monitors"
-    },
-    {
-      id: "23",
-      name: "Anesthesia Ventilator",
-      price: 280000,
-      image: ventilatorImg,
-      category: "Ventilators"
-    },
-    {
-      id: "24",
-      name: "Color Doppler Ultrasound",
-      price: 450000,
-      image: ultrasoundImg,
-      category: "Ultrasound"
-    }
-  ];
-
-  // Dental products
-  const dentalProducts = [
-    {
-      id: "25",
-      name: "Electric Dental Chair Unit",
-      price: 185000,
-      originalPrice: 210000,
-      image: dentalChairImg,
-      category: "Dental Chairs"
-    },
-    {
-      id: "26",
-      name: "High Speed Dental Handpiece",
-      price: 12500,
-      image: dentalHandpieceImg,
-      category: "Hand Pieces"
-    },
-    {
-      id: "27",
-      name: "Digital Dental X-Ray Sensor",
-      price: 95000,
-      image: dentalXrayImg,
-      category: "Dental X-Ray"
-    },
-    {
-      id: "28",
-      name: "Orthodontic Bracket Kit (Complete Set)",
-      price: 8500,
-      originalPrice: 11000,
-      image: orthodonticsImg,
-      category: "Orthodontics"
-    },
-    {
-      id: "29",
-      name: "Titanium Dental Implants (Pack of 10)",
-      price: 45000,
-      image: implantsImg,
-      category: "Implants"
-    },
-    {
-      id: "30",
-      name: "Low Speed Dental Handpiece",
-      price: 8500,
-      image: dentalHandpieceImg,
-      category: "Hand Pieces"
-    },
-    {
-      id: "31",
-      name: "Dental Chair with LED Light",
-      price: 165000,
-      originalPrice: 195000,
-      image: dentalChairImg,
-      category: "Dental Chairs"
-    },
-    {
-      id: "32",
-      name: "Orthodontic Arch Wires Set",
-      price: 3500,
-      image: orthodonticsImg,
-      category: "Orthodontics"
-    }
-  ];
-
-  // Surgical Instruments products
-  const surgicalProducts = [
-    {
-      id: "33",
-      name: "Surgical Scalpel Set (10 pieces)",
-      price: 1800,
-      originalPrice: 2200,
-      image: scalpelImg,
-      category: "Scalpels"
-    },
-    {
-      id: "34",
-      name: "Tissue Forceps 6 inch",
-      price: 450,
-      image: forcepsImg,
-      category: "Forceps"
-    },
-    {
-      id: "35",
-      name: "Surgical Scissors Curved",
-      price: 650,
-      image: scissorsImg,
-      category: "Scissors"
-    },
-    {
-      id: "36",
-      name: "Self-Retaining Retractor",
-      price: 2500,
-      originalPrice: 3000,
-      image: forcepsImg,
-      category: "Retractors"
-    },
-    {
-      id: "37",
-      name: "Hemostatic Clamps Set (5 pieces)",
-      price: 1850,
-      image: forcepsImg,
-      category: "Clamps"
-    },
-    {
-      id: "38",
-      name: "Disposable Scalpel Blades (Pack of 100)",
-      price: 850,
-      image: scalpelImg,
-      category: "Scalpels"
-    },
-    {
-      id: "39",
-      name: "Surgical Scissors Straight 5.5 inch",
-      price: 580,
-      originalPrice: 750,
-      image: scissorsImg,
-      category: "Scissors"
-    },
-    {
-      id: "40",
-      name: "Artery Forceps Curved 6 inch",
-      price: 520,
-      image: forcepsImg,
-      category: "Forceps"
-    }
-  ];
-
-  // Hospital Establishment products
-  const hospitalProducts = [
-    {
-      id: "41",
-      name: "Electric ICU Hospital Bed",
-      price: 55000,
-      originalPrice: 65000,
-      image: hospitalBedImg,
-      category: "Hospital Beds"
-    },
-    {
-      id: "42",
-      name: "Hydraulic Operating Table",
-      price: 185000,
-      image: operatingTableImg,
-      category: "Operating Tables"
-    },
-    {
-      id: "43",
-      name: "Medical Examination Couch",
-      price: 18500,
-      image: furnitureImg,
-      category: "Medical Furniture"
-    },
-    {
-      id: "44",
-      name: "LED Surgical Light Single Dome",
-      price: 125000,
-      originalPrice: 145000,
-      image: surgicalLightImg,
-      category: "Lighting"
-    },
-    {
-      id: "45",
-      name: "Medical Storage Cabinet Stainless Steel",
-      price: 28500,
-      image: storageImg,
-      category: "Storage"
-    },
-    {
-      id: "46",
-      name: "Manual Hospital Bed 3 Function",
-      price: 32000,
-      image: hospitalBedImg,
-      category: "Hospital Beds"
-    },
-    {
-      id: "47",
-      name: "Medical Trolley with Drawers",
-      price: 12500,
-      originalPrice: 15000,
-      image: furnitureImg,
-      category: "Medical Furniture"
-    },
-    {
-      id: "48",
-      name: "Double Door Medical Refrigerator",
-      price: 45000,
-      image: storageImg,
-      category: "Storage"
-    }
-  ];
-
-  const subcategories = categoryData[categoryName] || ["All"];
-  
-  const getProductsByCategory = () => {
-    if (!categoryName) {
-      // Return all products when no category is specified
-      return [
-        ...covidProducts,
-        ...consumableProducts,
-        ...medicalDeviceProducts,
-        ...dentalProducts,
-        ...surgicalProducts,
-        ...hospitalProducts
-      ];
-    }
-    
-    switch(categoryName) {
-      case "Covid-19 Essentials":
-        return covidProducts;
-      case "Consumable & Disposable":
-        return consumableProducts;
-      case "Medical Device & Equipment":
-        return medicalDeviceProducts;
-      case "Dental":
-        return dentalProducts;
-      case "Surgical Instruments":
-        return surgicalProducts;
-      case "Hospital Establishment":
-        return hospitalProducts;
-      default:
-        return [];
-    }
-  };
-
-  const products = getProductsByCategory();
+    fetchProducts();
+  }, []);
 
   const filteredProducts = products.filter(product => {
-    const matchesSubcategory = selectedSubcategory === "All" || product.category === selectedSubcategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSubcategory && matchesSearch;
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesSearch;
   });
 
   return (
@@ -480,37 +57,16 @@ const Products = () => {
             {categoryName || "All Products"}
           </h1>
           <p className="text-muted-foreground text-lg">
-            {categoryName ? "Browse products by subcategory" : "Browse all medical products and equipment"}
+            {categoryName ? `Browse ${categoryName} products` : "Browse all medical products and equipment"}
           </p>
         </div>
-
-        {/* Subcategory Filters */}
-        {categoryName && (
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <SlidersHorizontal className="h-5 w-5 text-muted-foreground" />
-              <h2 className="text-lg font-semibold">Filter by Subcategory</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {subcategories.map((sub) => (
-                <Badge
-                  key={sub}
-                  variant={selectedSubcategory === sub ? "default" : "outline"}
-                  className="cursor-pointer px-4 py-2 text-sm hover:bg-primary/90 transition-colors"
-                  onClick={() => setSelectedSubcategory(sub)}
-                >
-                  {sub}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
+              type="text"
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -520,21 +76,33 @@ const Products = () => {
         </div>
 
         {/* Products Grid */}
-        {filteredProducts.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">
-              {products.length === 0 
-                ? "Products coming soon for this category"
-                : "No products found matching your filters"}
-            </p>
-          </div>
-        )}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {loading ? (
+            <p className="col-span-full text-center text-muted-foreground py-12">Loading products...</p>
+          ) : filteredProducts.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground text-lg mb-4">
+                {searchTerm ? "No products found matching your search." : "No products available yet."}
+              </p>
+              {!searchTerm && (
+                <p className="text-sm text-muted-foreground">
+                  Please add products through the admin dashboard.
+                </p>
+              )}
+            </div>
+          ) : (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image_url}
+                category={product.description || ""}
+              />
+            ))
+          )}
+        </div>
       </main>
 
       <Footer />
