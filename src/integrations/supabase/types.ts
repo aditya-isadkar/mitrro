@@ -215,7 +215,10 @@ export type Database = {
           customer_name: string
           customer_phone: string | null
           id: string
+          payment_id: string | null
           payment_method: string | null
+          payment_status: string | null
+          razorpay_order_id: string | null
           shipping_address: string | null
           status: string
           total_amount: number
@@ -228,7 +231,10 @@ export type Database = {
           customer_name: string
           customer_phone?: string | null
           id?: string
+          payment_id?: string | null
           payment_method?: string | null
+          payment_status?: string | null
+          razorpay_order_id?: string | null
           shipping_address?: string | null
           status?: string
           total_amount: number
@@ -241,7 +247,10 @@ export type Database = {
           customer_name?: string
           customer_phone?: string | null
           id?: string
+          payment_id?: string | null
           payment_method?: string | null
+          payment_status?: string | null
+          razorpay_order_id?: string | null
           shipping_address?: string | null
           status?: string
           total_amount?: number
@@ -252,6 +261,7 @@ export type Database = {
       }
       products: {
         Row: {
+          category: string
           created_at: string | null
           description: string | null
           id: string
@@ -262,6 +272,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          category: string
           created_at?: string | null
           description?: string | null
           id?: string
@@ -272,6 +283,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          category?: string
           created_at?: string | null
           description?: string | null
           id?: string
@@ -310,6 +322,42 @@ export type Database = {
         }
         Relationships: []
       }
+      special_offer: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          discounted_price: number
+          id: string
+          image_url: string
+          name: string
+          price: number
+          quantity: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          discounted_price: number
+          id?: string
+          image_url: string
+          name: string
+          price: number
+          quantity: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          discounted_price?: number
+          id?: string
+          image_url?: string
+          name?: string
+          price?: number
+          quantity?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -330,6 +378,42 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      wishlist: {
+        Row: {
+          added_at: string | null
+          id: string
+          product_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          added_at?: string | null
+          id?: string
+          product_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          added_at?: string | null
+          id?: string
+          product_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wishlist_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wishlist_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
