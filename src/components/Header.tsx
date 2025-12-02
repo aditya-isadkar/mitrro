@@ -1,5 +1,5 @@
-import { Search, User, Menu, Phone, Mail, LogOut, UserCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Search, User, Menu, Phone, Mail, LogOut, UserCircle, Heart } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -7,10 +7,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import logoMitrro from "@/assets/logo-mitrro.webp";
 import Cart from "@/components/Cart";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const Header = () => {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleLogout = async () => {
     const { error } = await signOut();
@@ -18,6 +22,40 @@ const Header = () => {
       toast.error("Error signing out");
     } else {
       toast.success("Logged out successfully");
+    }
+  };
+
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      toast.error("Please enter a product name");
+      return;
+    }
+
+    try {
+      // Search for product by name in Supabase
+      const { data, error } = await supabase
+        .from("products")
+        .select("id")
+        .ilike("name", `%${searchTerm}%`)
+        .limit(1)
+        .single();
+
+      if (error || !data) {
+        toast.error("Product not found");
+        return;
+      }
+
+      // Navigate to the product page
+      navigate(`/products/${data.id}`);
+    } catch (err: any) {
+      toast.error("Error searching product");
+      console.error(err);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -31,13 +69,13 @@ const Header = () => {
               <Phone className="h-4 w-4" />
               <span>+91 99687 63181</span>
             </a>
-            <a href="mailto:contact@mitrro.com" className="flex items-center gap-2 hover:text-white/80 transition-colors">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mitrro.com" target="_blank" className="flex items-center gap-2 hover:text-white/80 transition-colors">
               <Mail className="h-4 w-4" />
               <span>contact@mitrro.com</span>
             </a>
           </div>
           <div className="hidden md:flex items-center gap-4 text-white">
-            <Link to="/sale-on-mitrro" className="hover:text-white/80 transition-colors">
+            <Link to="  " className="hover:text-white/80 transition-colors">
               <span>Sale on Mitrro</span>
             </Link>
             <span>Welcome to Mitrro</span>
@@ -63,10 +101,14 @@ const Header = () => {
               <div className="relative">
                 <Input
                   placeholder="I'm searching for..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="pl-4 pr-12 py-3 rounded-full border-border focus:ring-2 focus:ring-primary"
                 />
                 <Button
                   size="icon"
+                  onClick={handleSearch}
                   className="absolute right-1 top-1 h-8 w-8 rounded-full bg-gradient-primary hover:bg-gradient-secondary"
                 >
                   <Search className="h-4 w-4" />
@@ -104,6 +146,8 @@ const Header = () => {
                   </Button>
                 </Link>
               )}
+              <Heart onClick={()=>navigate('/wishlist')} className="cursor-pointer fill-red-200 border-none" />
+
               <Cart />
               <Link to="/login">
                 <Button variant="ghost" size="icon" className="md:hidden">
@@ -115,28 +159,14 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8 pb-4 border-t pt-4">
-            <Link to="/">
-              <Button variant="ghost" className="font-medium">Home</Button>
-            </Link>
-            <Link to="/categories">
-              <Button variant="ghost" className="font-medium">Categories</Button>
-            </Link>
-            <Link to="/brands">
-              <Button variant="ghost" className="font-medium">Brands</Button>
-            </Link>
-            <Link to="/about-us">
-              <Button variant="ghost" className="font-medium">About Us</Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="ghost" className="font-medium">Contact</Button>
-            </Link>
-            <Link to="/blog">
-              <Button variant="ghost" className="font-medium">Blog</Button>
-            </Link>
+            <Link to="/"><Button variant="ghost" className="font-medium">Home</Button></Link>
+            <Link to="/categories"><Button variant="ghost" className="font-medium">Categories</Button></Link>
+            <Link to="/brands"><Button variant="ghost" className="font-medium">Brands</Button></Link>
+            <Link to="/about-us"><Button variant="ghost" className="font-medium">About Us</Button></Link>
+            <Link to="/contact"><Button variant="ghost" className="font-medium">Contact</Button></Link>
+            <Link to="/blog"><Button variant="ghost" className="font-medium">Blog</Button></Link>
             <div className="ml-auto">
-              <Button className="bg-gradient-primary hover:opacity-90" disabled>
-                Special Offer
-              </Button>
+              <Button className="bg-gradient-primary hover:opacity-90" ><Link to={'/special_offer'}>Special Offer</Link></Button>
             </div>
           </nav>
         </div>

@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heart, Users, Shield, Award, Target, Globe, Stethoscope, Microscope } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
@@ -255,11 +256,12 @@ const AboutUs = () => {
             Join thousands of healthcare professionals who trust Mitrro for their pharmaceutical needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-primary">
-              Contact Our Team
+            <Button size="lg" variant="secondary" className="text-primary hover:bg-zinc-200">
+              <Link to={"/contact"}>Contact Our Team</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              View Our Products
+               <Link to={"/products"}> View Our Products</Link>
+             
             </Button>
           </div>
         </div>

@@ -6,10 +6,22 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -22,7 +34,7 @@ const Checkout = () => {
     customerEmail: "",
     customerPhone: "",
     shippingAddress: "",
-    paymentMethod: "cash_on_delivery",
+    paymentMethod: "razorpay", // default
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,25 +44,29 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (items.length === 0) {
-      toast({
-        title: "Cart is empty",
-        description: "Please add items to your cart before checkout",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  // Place order for Cash-on-Delivery
+  const handleCOD = async () => {
     setIsSubmitting(true);
 
     try {
-      // Get current user if logged in
       const { data: { user } } = await supabase.auth.getUser();
 
-      // Create order
+      // Validate stock
+      for (const item of items) {
+        const { data: product, error: productError } = await supabase
+          .from("products")
+          .select("quantity")
+          .eq("id", item.id)
+          .single();
+        if (productError) throw productError;
+        if ((product.quantity || 0) < item.quantity) {
+          throw new Error(
+            `Insufficient stock for ${item.name}. Available: ${product.quantity}`
+          );
+        }
+      }
+
+      // Insert order in Supabase
       const { data: order, error: orderError } = await supabase
         .from("orders")
         .insert({
@@ -59,16 +75,17 @@ const Checkout = () => {
           customer_email: formData.customerEmail,
           customer_phone: formData.customerPhone,
           shipping_address: formData.shippingAddress,
-          payment_method: formData.paymentMethod,
           total_amount: totalPrice,
           status: "pending",
+          payment_status: "pending",
+          payment_method: "cash_on_delivery",
         })
         .select()
         .single();
 
       if (orderError) throw orderError;
 
-      // Create order items
+      // Insert order items
       const orderItems = items.map((item) => ({
         order_id: order.id,
         product_name: item.name,
@@ -82,23 +99,153 @@ const Checkout = () => {
 
       if (itemsError) throw itemsError;
 
+      // Update product quantities
+      for (const item of items) {
+        const { data: productData } = await supabase
+          .from("products")
+          .select("quantity")
+          .eq("id", item.id)
+          .single();
+
+        const newQuantity = (productData.quantity || 0) - item.quantity;
+
+        await supabase
+          .from("products")
+          .update({ quantity: newQuantity })
+          .eq("id", item.id);
+      }
+
       toast({
-        title: "Order placed successfully!",
-        description: "Your order has been received and will be processed soon.",
+        title: "Order Placed",
+        description: "Your order has been placed successfully. Pay on delivery.",
       });
 
       clearCart();
       navigate("/");
-    } catch (error) {
-      console.error("Error placing order:", error);
+
+    } catch (error: any) {
       toast({
         title: "Error placing order",
-        description: "Something went wrong. Please try again.",
+        description: error.message || "Something went wrong",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Razorpay payment
+  const handleRazorpay = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      // Validate stock
+      for (const item of items) {
+        const { data: product, error: productError } = await supabase
+          .from("products")
+          .select("quantity")
+          .eq("id", item.id)
+          .single();
+        if (productError) throw productError;
+        if ((product.quantity || 0) < item.quantity) {
+          throw new Error(
+            `Insufficient stock for ${item.name}. Available: ${product.quantity}`
+          );
+        }
+      }
+
+      // Call create-order function
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-order`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: totalPrice,
+            user_id: user?.id || null,
+            customer_name: formData.customerName,
+            customer_email: formData.customerEmail,
+            customer_phone: formData.customerPhone,
+            shipping_address: formData.shippingAddress,
+          }),
+        }
+      );
+
+      const { order: razorpayOrder } = await res.json();
+      if (!razorpayOrder) throw new Error("Failed to create Razorpay order");
+
+      // Razorpay popup
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: razorpayOrder.amount,
+        currency: "INR",
+        name: "Your Store",
+        description: "Purchase",
+        order_id: razorpayOrder.id,
+        handler: async function (res: any) {
+          try {
+            // Verify payment
+            const verifyRes = await fetch(
+              `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-payment`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  razorpay_payment_id: res.razorpay_payment_id,
+                  razorpay_order_id: res.razorpay_order_id,
+                  razorpay_signature: res.razorpay_signature,
+                }),
+              }
+            );
+
+            const verifyData = await verifyRes.json();
+            if (!verifyData.success) throw new Error(verifyData.error);
+
+            toast({
+              title: "Payment Successful",
+              description: "Your order has been placed successfully.",
+            });
+
+            clearCart();
+            navigate("/");
+
+          } catch (err: any) {
+            toast({
+              title: "Payment Verification Failed",
+              description: err.message,
+              variant: "destructive",
+            });
+          }
+        },
+        prefill: {
+          name: formData.customerName,
+          email: formData.customerEmail,
+          contact: formData.customerPhone,
+        },
+        theme: { color: "#2563eb" },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Something went wrong",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle form submit
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.paymentMethod === "razorpay") handleRazorpay();
+    else handleCOD();
   };
 
   if (items.length === 0) {
@@ -109,7 +256,9 @@ const Checkout = () => {
           <Card>
             <CardHeader>
               <CardTitle>Your cart is empty</CardTitle>
-              <CardDescription>Add some products before proceeding to checkout</CardDescription>
+              <CardDescription>
+                Add some products before proceeding to checkout
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Button onClick={() => navigate("/")}>Continue Shopping</Button>
@@ -126,7 +275,7 @@ const Checkout = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8">Checkout</h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Summary */}
           <Card>
@@ -145,10 +294,14 @@ const Checkout = () => {
                       />
                       <div>
                         <p className="font-medium">{item.name}</p>
-                        <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Qty: {item.quantity}
+                        </p>
                       </div>
                     </div>
-                    <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-medium">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 ))}
                 <Separator />
@@ -160,13 +313,13 @@ const Checkout = () => {
             </CardContent>
           </Card>
 
-          {/* Customer Details Form */}
+          {/* Customer Form */}
           <Card>
             <CardHeader>
               <CardTitle>Shipping & Payment Information</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="space-y-2">
                   <Label htmlFor="customerName">Full Name *</Label>
                   <Input
@@ -213,17 +366,26 @@ const Checkout = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="paymentMethod">Payment Method</Label>
-                  <Input
+                  <select
                     id="paymentMethod"
                     name="paymentMethod"
                     value={formData.paymentMethod}
-                    onChange={handleInputChange}
-                    placeholder="Cash on Delivery"
-                  />
+                    onChange={(e) =>
+                      setFormData({ ...formData, paymentMethod: e.target.value })
+                    }
+                    className="w-full border rounded p-2"
+                  >
+                    <option value="razorpay">Razorpay</option>
+                    <option value="cash_on_delivery">Cash on Delivery</option>
+                  </select>
                 </div>
 
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Placing Order..." : "Place Order"}
+                  {isSubmitting
+                    ? "Processing..."
+                    : formData.paymentMethod === "razorpay"
+                    ? "Pay with Razorpay"
+                    : "Place Order (COD)"}
                 </Button>
               </form>
             </CardContent>

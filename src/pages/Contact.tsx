@@ -55,9 +55,8 @@ const Contact = () => {
           email: data.email,
           phone: data.phone,
           message: detailedMessage,
-        })
-        .select();
-
+        });
+ 
       if (error) {
         console.error("Supabase insert error:", error);
         throw error;

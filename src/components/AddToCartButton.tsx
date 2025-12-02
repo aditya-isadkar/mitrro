@@ -9,6 +9,7 @@ interface AddToCartButtonProps {
     name: string;
     price: number;
     image: string;
+    maxQuantity:number;
   };
   variant?: "default" | "outline" | "secondary" | "ghost";
   size?: "default" | "sm" | "lg";

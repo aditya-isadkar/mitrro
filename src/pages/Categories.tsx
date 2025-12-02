@@ -1,166 +1,133 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Grid, List } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url?: string;
+  category: string;
+}
 
 const Categories = () => {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const categories = [
-    {
-      id: 1,
-      name: "Covid-19 Essentials",
-      description: "Essential products for COVID-19 prevention and treatment",
-      productCount: 67,
-      image: "/placeholder.svg",
-      subcategories: ["Vaccines", "Test Kits", "N95 Masks", "Sanitizers", "PPE"]
-    },
-    {
-      id: 2,
-      name: "Consumable & Disposable",
-      description: "Single-use medical supplies and consumables",
-      productCount: 234,
-      image: "/placeholder.svg",
-      subcategories: ["Syringes", "Gloves", "Gauze", "Bandages", "Surgical Drapes"]
-    },
-    {
-      id: 3,
-      name: "Medical Device & Equipment",
-      description: "Advanced medical devices and diagnostic equipment",
-      productCount: 156,
-      image: "/placeholder.svg",
-      subcategories: ["Monitors", "Ventilators", "X-Ray Machines", "Ultrasound", "Defibrillators"]
-    },
-    {
-      id: 4,
-      name: "Dental",
-      description: "Comprehensive dental care equipment and supplies",
-      productCount: 89,
-      image: "/placeholder.svg",
-      subcategories: ["Dental Chairs", "Hand Pieces", "Dental X-Ray", "Orthodontics", "Implants"]
-    },
-    {
-      id: 5,
-      name: "Surgical Instruments",
-      description: "Precision surgical tools and instruments",
-      productCount: 178,
-      image: "/placeholder.svg",
-      subcategories: ["Scalpels", "Forceps", "Scissors", "Retractors", "Clamps"]
-    },
-    {
-      id: 6,
-      name: "Hospital Establishment",
-      description: "Complete solutions for hospital setup and infrastructure",
-      productCount: 123,
-      image: "/placeholder.svg",
-      subcategories: ["Hospital Beds", "Operating Tables", "Medical Furniture", "Lighting", "Storage"]
-    }
-  ];
+  // Fetch products from Supabase
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from<Product>("products")
+        .select("*");
 
-  const filteredCategories = categories.filter(category =>
-    category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    category.description.toLowerCase().includes(searchTerm.toLowerCase())
+      if (error) {
+        console.error("Error fetching products:", error.message);
+      } else {
+        setProducts(data || []);
+      }
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Filter products based on search term
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Group products by category
+  const productsByCategory = filteredProducts.reduce<Record<string, Product[]>>((acc, product) => {
+    if (!acc[product.category]) acc[product.category] = [];
+    acc[product.category].push(product);
+    return acc;
+  }, {});
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-4">
             Product 
-            <span className="bg-gradient-primary bg-clip-text text-transparent ml-2">
+            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent ml-2">
               Categories
             </span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Browse our comprehensive range of medical and healthcare products organized by category
+            Browse our range of medical and healthcare products organized by category
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search categories..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
-            </Button>
-            <div className="flex border rounded-md">
-              <Button
-                variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setViewMode('grid')}
-                className="rounded-r-none"
-              >
-                <Grid className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === 'list' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setViewMode('list')}
-                className="rounded-l-none"
-              >
-                <List className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+        {/* Search Bar */}
+        <div className="mb-8 relative max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
         </div>
 
-        {/* Categories Grid/List */}
-        <div className={`${
-          viewMode === 'grid' 
-            ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' 
-            : 'space-y-4'
-        }`}>
-          {filteredCategories.map((category, index) => (
-            <Card 
-              key={category.id} 
-              className="hover:shadow-lg transition-shadow cursor-pointer animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="text-xl mb-2">{category.name}</CardTitle>
-                    <p className="text-muted-foreground text-sm mb-3">
-                      {category.description}
-                    </p>
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <Button 
-                  className="w-full" 
-                  onClick={() => window.location.href = `/products?category=${encodeURIComponent(category.name)}`}
-                >
-                  Browse Products
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {/* Categories Sections */}
+        {loading ? (
+          <p className="text-center text-muted-foreground py-12">Loading products...</p>
+        ) : (
+          Object.keys(productsByCategory).map((category) => (
+            <section key={category} className="mb-12">
+              <h2 className="text-2xl font-semibold mb-4">{category}</h2>
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {productsByCategory[category].map((product) => (
+                  <Card
+                    key={product.id}
+                    className="bg-white rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+                  >
+                    <div className="relative">
+                      <img
+                        src={product.image_url || "/placeholder.svg"}
+                        alt={product.name}
+                        className="h-32 w-full object-cover rounded-t-lg"
+                      />
+                    </div>
 
-        {filteredCategories.length === 0 && (
+                    <CardContent className="flex-1 flex flex-col justify-between p-3">
+                      <div>
+                        <CardTitle className="text-md font-semibold mb-1">{product.name}</CardTitle>
+                        <p className="text-gray-500 text-xs mb-2">{product.description}</p>
+                      </div>
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-indigo-600 font-semibold text-sm">₹{product.price.toFixed(2)}</span>
+                        <Button
+                          className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-90 text-white text-xs px-2 py-1"
+                          onClick={() => window.location.href = `/products/${product.id}`}
+                        >
+                          View
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          ))
+        )}
+
+        {!loading && filteredProducts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No categories found matching your search.</p>
+            <p className="text-muted-foreground text-lg">No products found matching your search.</p>
           </div>
         )}
       </main>

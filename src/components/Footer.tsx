@@ -133,7 +133,7 @@ const Footer = () => {
                 <Phone className="h-5 w-5 text-primary" />
                 <span>+91 99687 63181</span>
               </a>
-              <a href="mailto:contact@mitrro.com" className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mitrro.com" target="_blank" className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors">
                 <Mail className="h-5 w-5 text-primary" />
                 <span>contact@mitrro.com</span>
               </a>

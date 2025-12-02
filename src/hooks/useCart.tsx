@@ -6,11 +6,12 @@ export interface CartItem {
   price: number;
   image: string;
   quantity: number;
+  maxQuantity?: number; // optional max quantity per product
 }
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  addItem: (item: Omit<CartItem, 'quantity'> & { maxQuantity?: number }) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -44,18 +45,23 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem('mitrro-cart', JSON.stringify(items));
   }, [items]);
 
-  const addItem = (newItem: Omit<CartItem, 'quantity'>) => {
+  const addItem = (newItem: Omit<CartItem, 'quantity'> & { maxQuantity?: number }) => {
     setItems(currentItems => {
       const existingItem = currentItems.find(item => item.id === newItem.id);
-      
+
       if (existingItem) {
+        // If maxQuantity is defined, prevent exceeding it
+        const newQuantity = Math.min(
+          existingItem.quantity + 1,
+          existingItem.maxQuantity ?? Infinity
+        );
         return currentItems.map(item =>
           item.id === newItem.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: newQuantity }
             : item
         );
       }
-      
+
       return [...currentItems, { ...newItem, quantity: 1 }];
     });
   };
@@ -65,15 +71,18 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const updateQuantity = (id: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeItem(id);
-      return;
-    }
-    
     setItems(currentItems =>
-      currentItems.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
+      currentItems.map(item => {
+        if (item.id === id) {
+          // Ensure quantity is within 1 and maxQuantity
+          const newQuantity = Math.max(
+            0,
+            Math.min(quantity, item.maxQuantity ?? Infinity)
+          );
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      })
     );
   };
 
@@ -82,7 +91,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
@@ -105,7 +114,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;

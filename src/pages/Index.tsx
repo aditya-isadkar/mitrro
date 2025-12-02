@@ -3,6 +3,10 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Footer from "@/components/Footer";
+import Categories from '@/components/Categories';
+import Reviews from '@/components/Reviews';
+import FaqPage from '@/components/Faq';
+
 
 const Index = () => {
   return (
@@ -23,7 +27,10 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <Categories />
         <FeaturedProducts />
+        <Reviews />
+        <FaqPage />
       </main>
       <Footer />
     </div>

@@ -13,9 +13,11 @@ interface Product {
   id: string;
   name: string;
   price: number;
+  discounted_price?: number; // for special_offer
   image_url: string;
   description?: string;
   quantity: number;
+  isSpecial?: boolean;
 }
 
 const ProductDetail = () => {
@@ -23,6 +25,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { addItem } = useCart();
   const { toast } = useToast();
+
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -30,17 +33,31 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       if (!id) return;
-      
       setLoading(true);
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('id', id)
+
+      // Try fetching from special_offer table first
+      let { data, error } = await supabase
+        .from("special_offer")
+        .select("*")
+        .eq("id", id)
         .maybeSingle();
-      
-      if (!error && data) {
-        setProduct(data);
+
+      if (error) console.error(error);
+
+      if (!data) {
+        // Fallback to products table
+        const res = await supabase
+          .from("products")
+          .select("*")
+          .eq("id", id)
+          .maybeSingle();
+        data = res.data;
+        if (res.error) console.error(res.error);
+      } else {
+        data.isSpecial = true; // mark special offer
       }
+
+      if (data) setProduct(data);
       setLoading(false);
     };
 
@@ -54,8 +71,9 @@ const ProductDetail = () => {
       addItem({
         id: product.id,
         name: product.name,
-        price: product.price,
+        price: product.discounted_price || product.price,
         image: product.image_url,
+        maxQuantity: product.quantity,
       });
     }
 
@@ -99,7 +117,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <Button
@@ -120,21 +138,32 @@ const ProductDetail = () => {
               alt={product.name}
               className="w-full h-full object-cover"
             />
+            {product.isSpecial && (
+              <Badge className="absolute top-4 left-4 bg-red-500 text-white">
+                Special Offer
+              </Badge>
+            )}
           </div>
 
           {/* Product Info */}
           <div className="flex flex-col">
             <div className="mb-6">
-              {product.description && (
-                <Badge variant="secondary" className="mb-4">
-                  {product.description}
-                </Badge>
-              )}
               <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
               <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-3xl font-bold text-primary">
-                  ₹{product.price.toLocaleString()}
-                </span>
+                {product.isSpecial && product.discounted_price ? (
+                  <>
+                    <span className="text-3xl font-bold text-primary">
+                      ₹{product.discounted_price.toLocaleString()}
+                    </span>
+                    <span className="line-through text-muted-foreground">
+                      ₹{product.price.toLocaleString()}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-3xl font-bold text-primary">
+                    ₹{product.price.toLocaleString()}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -147,30 +176,45 @@ const ProductDetail = () => {
 
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-2">Availability</h2>
-              <Badge variant={product.quantity > 0 ? "default" : "destructive"}>
-                {product.quantity > 0 ? `${product.quantity} in stock` : "Out of stock"}
+              <Badge
+                variant={product.quantity > 0 ? "default" : "destructive"}
+              >
+                {product.quantity > 0
+                  ? `${product.quantity} in stock`
+                  : "Out of stock"}
               </Badge>
             </div>
 
             {/* Quantity Selector */}
             <div className="mb-6">
-              <label htmlFor="quantity" className="text-sm font-medium mb-2 block">
+              <label
+                htmlFor="quantity"
+                className="text-sm font-medium mb-2 block"
+              >
                 Quantity
               </label>
               <div className="flex items-center gap-3">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
+                  onClick={() =>
+                    setSelectedQuantity(Math.max(1, selectedQuantity - 1))
+                  }
                   disabled={selectedQuantity <= 1}
                 >
                   -
                 </Button>
-                <span className="w-12 text-center font-semibold">{selectedQuantity}</span>
+                <span className="w-12 text-center font-semibold">
+                  {selectedQuantity}
+                </span>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setSelectedQuantity(Math.min(product.quantity, selectedQuantity + 1))}
+                  onClick={() =>
+                    setSelectedQuantity(
+                      Math.min(product.quantity, selectedQuantity + 1)
+                    )
+                  }
                   disabled={selectedQuantity >= product.quantity}
                 >
                   +
@@ -188,9 +232,6 @@ const ProductDetail = () => {
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Add to Cart
-              </Button>
-              <Button size="lg" variant="outline">
-                <Heart className="h-5 w-5" />
               </Button>
             </div>
           </div>

@@ -25,6 +25,9 @@ import AdminRegister from "./pages/admin/AdminRegister";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
+import SpecialOffersPage from "./pages/SpecialOffersPage";
+import Wishlist from "./pages/Wishlist";
+import ReviewsPage from "./pages/ReviewsPage";
 
 const queryClient = new QueryClient();
 
@@ -40,8 +43,10 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/categories" element={<Categories />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
+
+                <Route path="/products" element={<Products />} />
+                <Route path="/special_offer" element={<SpecialOffersPage />} />
+                <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/brands" element={<Brands />} />
                 <Route path="/sale-on-mitrro" element={<SaleOnMitrro />} />
                 <Route path="/about-us" element={<AboutUs />} />
@@ -53,6 +58,8 @@ const App = () => (
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/reviews/:id" element={<ReviewsPage />} />
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/register" element={<AdminRegister />} />

@@ -119,6 +119,12 @@ ON public.orders
 FOR SELECT
 USING (auth.uid() = user_id);
 
+
+CREATE POLICY "Users can order products"
+ON public.orders
+FOR INSERT
+USING (auth.uid()= user_id);
+
 CREATE POLICY "Admins can view all orders"
 ON public.orders
 FOR SELECT
@@ -146,3 +152,52 @@ CREATE TRIGGER update_orders_updated_at
 BEFORE UPDATE ON public.orders
 FOR EACH ROW
 EXECUTE FUNCTION public.update_updated_at_column();
+
+
+
+-- About Products Table 
+CREATE TABLE public.products (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  image_url TEXT NOT NULL,
+  name TEXT NOT NULL,
+  description TEXT,
+  price NUMERIC(10,2) NOT NULL CHECK (price >= 0),
+  quantity INTEGER NOT NULL CHECK (quantity >= 0),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can read products"
+ON public.products
+FOR SELECT
+USING (true);
+
+
+CREATE POLICY "Authenticated can read products"
+ON public.products
+FOR SELECT
+TO authenticated
+USING (true);
+
+CREATE POLICY "Admins can insert products"
+ON public.products
+FOR INSERT
+TO authenticated
+WITH CHECK (public.has_role(auth.uid(), 'admin'));
+
+DROP POLICY "Authenticated can update products" ON public.products;
+CREATE POLICY "Authenticated can update products"
+ON public.products
+FOR UPDATE
+TO authenticated
+WITH CHECK (public.has_role(auth.uid(), 'admin'));
+DROP POLICY "Authenticated can delete products" ON public.products;
+
+CREATE POLICY "Admins update products only"
+ON public.products
+FOR UPDATE
+TO authenticated
+USING (public.has_role(auth.uid(), 'admin'))
+WITH CHECK (public.has_role(auth.uid(), 'admin'));
